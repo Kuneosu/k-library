@@ -4,10 +4,10 @@ export const developerProfile: DeveloperProfile = {
   name: "김권수 (Kuneosu)",
   title: "Full-Stack Developer & Creative Technologist",
   bio: "주간/일일 사이드 프로젝트로 기술의 경계를 탐험하는 개발자입니다. 실용적이고 창의적인 솔루션을 만들어내는 것을 즐깁니다.",
-  email: "kuneosu@example.com",
+  email: "kks92155784@gmail.com",
   github: "https://github.com/kuneosu",
+  website: "https://kimkwonsu.notion.site",
   linkedin: "https://linkedin.com/in/kuneosu",
-  website: "https://kuneosu.dev",
   skills: [
     {
       category: "Frontend",
@@ -54,7 +54,7 @@ export const projects: Project[] = [
       "팀 대시보드",
       "알림 시스템"
     ],
-    screenshots: ["/screenshots/taskflow1.png", "/screenshots/taskflow2.png"],
+    screenshots: ["https://picsum.photos/800/600?random=1", "https://picsum.photos/800/600?random=2", "https://picsum.photos/800/600?random=13", "https://picsum.photos/800/600?random=14"],
     highlights: ["10,000+ 활성 사용자", "99.9% 가동 시간", "4.8★ 사용자 평점"],
     challenges: ["실시간 동기화 구현", "대용량 데이터 최적화"],
     stars: 856,
@@ -105,7 +105,7 @@ export const projects: Project[] = [
       "접근성 준수",
       "테마 커스터마이징"
     ],
-    screenshots: ["/screenshots/components1.png"],
+    screenshots: ["https://picsum.photos/800/600?random=3"],
     downloads: 18500,
     stars: 1203
   },
@@ -127,7 +127,7 @@ export const projects: Project[] = [
       "프롬프트 템플릿",
       "다중 모델 지원"
     ],
-    screenshots: [],
+    screenshots: ["https://picsum.photos/800/600?random=4"],
     stars: 567
   },
   {
@@ -148,7 +148,7 @@ export const projects: Project[] = [
       "위치 기반 서비스",
       "푸시 알림"
     ],
-    screenshots: [],
+    screenshots: ["https://picsum.photos/800/600?random=5"],
     stars: 89
   },
   {
@@ -169,7 +169,7 @@ export const projects: Project[] = [
       "레이트 리미팅",
       "모니터링 대시보드"
     ],
-    screenshots: [],
+    screenshots: ["https://picsum.photos/800/600?random=6"],
     stars: 445
   },
   {
@@ -191,7 +191,7 @@ export const projects: Project[] = [
       "애니메이션 지원",
       "이미지 익스포트"
     ],
-    screenshots: [],
+    screenshots: ["https://picsum.photos/800/600?random=7", "https://picsum.photos/800/600?random=8", "https://picsum.photos/800/600?random=15", "https://picsum.photos/800/600?random=16", "https://picsum.photos/800/600?random=17"],
     stars: 678
   },
   {
@@ -214,7 +214,7 @@ export const projects: Project[] = [
       "SEO 최적화",
       "다크 모드"
     ],
-    screenshots: [],
+    screenshots: ["https://picsum.photos/800/600?random=9"],
     stars: 234
   },
   {
@@ -234,7 +234,7 @@ export const projects: Project[] = [
       "상태 동기화",
       "스케일링 지원"
     ],
-    screenshots: [],
+    screenshots: ["https://picsum.photos/800/600?random=10"],
     stars: 156
   },
   {
@@ -256,7 +256,7 @@ export const projects: Project[] = [
       "데이터 필터링",
       "CSV 익스포트"
     ],
-    screenshots: [],
+    screenshots: ["https://picsum.photos/800/600?random=11", "https://picsum.photos/800/600?random=12"],
     stars: 892
   }
 ]

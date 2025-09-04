@@ -1,8 +1,12 @@
 "use client"
 
+import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { X, Github, ExternalLink, Package, Calendar, Star, Download, Users, Clock, CheckCircle, AlertCircle } from 'lucide-react'
+import { X, Github, ExternalLink, Package, Calendar, Star, Download, Users, Clock, CheckCircle, AlertCircle, Image } from 'lucide-react'
 import { Project } from '@/types'
+import NextImage from 'next/image'
+import ImageViewer from './ImageViewer'
+import SwipeableImageGallery from './SwipeableImageGallery'
 
 interface ProjectModalProps {
   project: Project | null
@@ -26,7 +30,15 @@ const statusColors = {
 }
 
 export default function ProjectModal({ project, onClose }: ProjectModalProps) {
+  const [imageViewerIndex, setImageViewerIndex] = useState(0)
+  const [isImageViewerOpen, setIsImageViewerOpen] = useState(false)
+
   if (!project) return null
+
+  const openImageViewer = (index: number) => {
+    setImageViewerIndex(index)
+    setIsImageViewerOpen(true)
+  }
 
   const links = [
     { icon: Github, url: project.githubUrl, label: 'GitHub 저장소' },
@@ -37,22 +49,24 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
   const StatusIcon = statusIcons[project.status]
 
   return (
-    <AnimatePresence>
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
-        onClick={onClose}
-      >
+    <>
+      <AnimatePresence>
         <motion.div
-          initial={{ opacity: 0, scale: 0.95, y: 20 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.95, y: 20 }}
-          transition={{ type: "spring", damping: 25, stiffness: 300 }}
-          className="bg-card border border-border rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden"
-          onClick={(e) => e.stopPropagation()}
+          key="project-modal"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+          onClick={onClose}
         >
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95, y: 20 }}
+            transition={{ type: "spring", damping: 25, stiffness: 300 }}
+            className="bg-card border border-border rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
+          >
           {/* Header */}
           <div className="flex items-start justify-between p-6 border-b border-border">
             <div className="flex-1">
@@ -82,6 +96,15 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
           {/* Content */}
           <div className="overflow-y-auto max-h-[calc(90vh-80px)]">
             <div className="p-6 space-y-6">
+              {/* Project Screenshots */}
+              {project.screenshots.length > 0 && (
+                <SwipeableImageGallery
+                  images={project.screenshots}
+                  projectName={project.name}
+                  onImageClick={openImageViewer}
+                />
+              )}
+              
               {/* Description */}
               <div>
                 <h3 className="text-lg font-semibold mb-3">프로젝트 소개</h3>
@@ -227,8 +250,18 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
               </div>
             </div>
           </div>
+          </motion.div>
         </motion.div>
-      </motion.div>
-    </AnimatePresence>
+      </AnimatePresence>
+
+      {/* Image Viewer */}
+      <ImageViewer
+        images={project.screenshots}
+        initialIndex={imageViewerIndex}
+        isOpen={isImageViewerOpen}
+        onClose={() => setIsImageViewerOpen(false)}
+        projectName={project.name}
+      />
+    </>
   )
 }

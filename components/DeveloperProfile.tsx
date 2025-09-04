@@ -1,9 +1,9 @@
 "use client"
 
 import { motion } from 'framer-motion'
-import { Github, Linkedin, Twitter, Globe, Mail, Code2, Calendar, Award } from 'lucide-react'
+import { Github, Linkedin, Twitter, Globe, Mail, Code2, Calendar, Award, Copy, Check } from 'lucide-react'
+import { useState } from 'react'
 import { DeveloperProfile as ProfileType } from '@/types'
-import { calculateExperience } from '@/utils/dateUtils'
 
 interface DeveloperProfileProps {
   profile: ProfileType
@@ -16,17 +16,42 @@ interface DeveloperProfileProps {
 }
 
 export default function DeveloperProfile({ profile, projectStats }: DeveloperProfileProps) {
-  // 경력 시작일 (2024년 8월 1일)
-  const careerStartDate = '2024-08-01'
-  const calculatedExperience = calculateExperience(careerStartDate)
+  // Experience는 이미 데이터베이스에서 계산되어 전달됨
+  const experienceText = profile.experience < 1 
+    ? `${Math.floor(profile.experience * 12)}개월`
+    : profile.experience % 1 === 0 
+      ? `${profile.experience}년`
+      : `${Math.floor(profile.experience)}년 ${Math.floor((profile.experience % 1) * 12)}개월`
+  
+  const [showEmailPopup, setShowEmailPopup] = useState(false)
+  const [emailCopied, setEmailCopied] = useState(false)
+  
+  const handleEmailClick = () => {
+    setShowEmailPopup(true)
+  }
+  
+  const copyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(profile.email)
+      setEmailCopied(true)
+      setTimeout(() => setEmailCopied(false), 2000)
+    } catch (err) {
+      console.error('Failed to copy email:', err)
+    }
+  }
+  
+  const handleBackdropClick = (e: React.MouseEvent) => {
+    if (e.target === e.currentTarget) {
+      setShowEmailPopup(false)
+    }
+  }
   
   const socialLinks = [
-    { icon: Github, href: profile.github, label: 'GitHub' },
-    { icon: Mail, href: `mailto:${profile.email}`, label: 'Email' },
-    { icon: Linkedin, href: profile.linkedin, label: 'LinkedIn' },
-    { icon: Twitter, href: profile.twitter, label: 'Twitter' },
-    { icon: Globe, href: profile.website, label: 'Website' },
-  ].filter(link => link.href)
+    { icon: Github, href: profile.github, label: 'GitHub', action: 'link' },
+    { icon: Mail, href: null, label: 'Email', action: 'email' },
+    { icon: Globe, href: profile.website, label: 'Website', action: 'link' },
+    { icon: Linkedin, href: profile.linkedin, label: 'LinkedIn', action: 'disabled', disabled: true },
+  ].filter(link => link.href || link.action === 'email' || link.disabled)
 
   return (
     <motion.section
@@ -75,21 +100,49 @@ export default function DeveloperProfile({ profile, projectStats }: DeveloperPro
               transition={{ delay: 0.4 }}
             >
               {socialLinks.map((link, index) => (
-                <motion.a
+                <motion.div
                   key={link.label}
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-4 py-2 rounded-lg bg-background/50 backdrop-blur-sm border border-border hover:bg-background/80 transition-colors"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
+                  className={`relative ${link.disabled ? 'cursor-not-allowed' : ''}`}
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 0.5 + index * 0.05 }}
                 >
-                  <link.icon className="w-4 h-4" />
-                  <span className="text-sm font-medium">{link.label}</span>
-                </motion.a>
+                  {link.disabled && (
+                    <div className="absolute -top-2 -right-2 z-10">
+                      <span className="bg-yellow-500 text-white text-xs px-1.5 py-0.5 rounded-full font-medium">
+                        준비중
+                      </span>
+                    </div>
+                  )}
+                  {link.action === 'email' ? (
+                    <motion.button
+                      onClick={handleEmailClick}
+                      className="flex items-center gap-2 px-4 py-2 rounded-lg bg-background/50 backdrop-blur-sm border border-border hover:bg-background/80 transition-colors"
+                      whileHover={!link.disabled ? { scale: 1.05 } : {}}
+                      whileTap={!link.disabled ? { scale: 0.95 } : {}}
+                    >
+                      <link.icon className="w-4 h-4" />
+                      <span className="text-sm font-medium">{link.label}</span>
+                    </motion.button>
+                  ) : (
+                    <motion.a
+                      href={link.disabled ? undefined : link.href || '#'}
+                      target={link.disabled ? undefined : "_blank"}
+                      rel={link.disabled ? undefined : "noopener noreferrer"}
+                      className={`flex items-center gap-2 px-4 py-2 rounded-lg bg-background/50 backdrop-blur-sm border border-border transition-colors ${
+                        link.disabled 
+                          ? 'opacity-50 cursor-not-allowed' 
+                          : 'hover:bg-background/80'
+                      }`}
+                      whileHover={!link.disabled ? { scale: 1.05 } : {}}
+                      whileTap={!link.disabled ? { scale: 0.95 } : {}}
+                      onClick={link.disabled ? (e) => e.preventDefault() : undefined}
+                    >
+                      <link.icon className="w-4 h-4" />
+                      <span className="text-sm font-medium">{link.label}</span>
+                    </motion.a>
+                  )}
+                </motion.div>
               ))}
             </motion.div>
 
@@ -138,7 +191,7 @@ export default function DeveloperProfile({ profile, projectStats }: DeveloperPro
             <StatCard
               icon={Calendar}
               label="경력"
-              value={calculatedExperience}
+              value={experienceText}
               delay={0.8}
             />
             <StatCard
@@ -184,6 +237,64 @@ export default function DeveloperProfile({ profile, projectStats }: DeveloperPro
           </div>
         </motion.div>
       </div>
+
+      {/* Email Popup */}
+      {showEmailPopup && (
+        <motion.div
+          className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onClick={handleBackdropClick}
+        >
+          <motion.div
+            className="bg-background border border-border rounded-xl p-8 w-full max-w-md mx-4 shadow-2xl"
+            initial={{ opacity: 0, scale: 0.9, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.9, y: 20 }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center gap-4 mb-6">
+              <div className="p-2 bg-primary/10 rounded-lg">
+                <Mail className="w-6 h-6 text-primary" />
+              </div>
+              <h3 className="text-xl font-semibold text-foreground">이메일 주소</h3>
+            </div>
+            
+            <div className="bg-muted/30 border border-border/50 rounded-lg p-4 mb-6">
+              <p className="text-base font-mono text-foreground break-all">
+                {profile.email}
+              </p>
+            </div>
+            
+            <div className="flex flex-col sm:flex-row gap-3">
+              <button
+                onClick={copyEmail}
+                className="flex items-center justify-center gap-3 px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors flex-1 font-medium"
+              >
+                {emailCopied ? (
+                  <>
+                    <Check className="w-5 h-5" />
+                    <span>복사됨!</span>
+                  </>
+                ) : (
+                  <>
+                    <Copy className="w-5 h-5" />
+                    <span>복사하기</span>
+                  </>
+                )}
+              </button>
+              
+              <button
+                onClick={() => setShowEmailPopup(false)}
+                className="px-6 py-3 border border-border rounded-lg hover:bg-muted/50 transition-colors text-foreground font-medium sm:w-auto"
+              >
+                닫기
+              </button>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
     </motion.section>
   )
 }

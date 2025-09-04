@@ -1,16 +1,22 @@
-"use client"
+"use client";
 
-import { useState, useEffect, useMemo } from 'react'
-import { motion } from 'framer-motion'
-import DeveloperProfile from '@/components/DeveloperProfile'
-import ProjectGrid from '@/components/ProjectGrid'
-import ThemeToggle from '@/components/ThemeToggle'
-import { developerProfile } from '@/data/mockData'
-import { getAllProjects, getProjectStats } from '@/lib/database'
-import { Project } from '@/types'
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import DeveloperProfile from "@/components/DeveloperProfile";
+import ProjectGrid from "@/components/ProjectGrid";
+import ThemeToggle from "@/components/ThemeToggle";
+import AdminPanel from "@/components/AdminPanel";
+import AddProjectButton from "@/components/AddProjectButton";
+import { developerProfile } from "@/data/mockData";
+import {
+  getAllProjects,
+  getProjectStats,
+  getDeveloperProfileWithSkills,
+} from "@/lib/database";
+import { Project, DeveloperProfile as DeveloperProfileType } from "@/types";
 
 export default function HomePage() {
-  const [projects, setProjects] = useState<Project[]>([])
+  const [projects, setProjects] = useState<Project[]>([]);
   const [projectStats, setProjectStats] = useState({
     total: 0,
     active: 0,
@@ -18,31 +24,34 @@ export default function HomePage() {
     maintenance: 0,
     archived: 0,
     inProgress: 0,
-  })
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
+  });
+  const [profile, setProfile] = useState<DeveloperProfileType | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     async function fetchData() {
       try {
-        setLoading(true)
-        const [projectsData, statsData] = await Promise.all([
+        setLoading(true);
+        const [projectsData, statsData, profileData] = await Promise.all([
           getAllProjects(),
-          getProjectStats()
-        ])
-        
-        setProjects(projectsData)
-        setProjectStats(statsData)
+          getProjectStats(),
+          getDeveloperProfileWithSkills(),
+        ]);
+
+        setProjects(projectsData);
+        setProjectStats(statsData);
+        setProfile(profileData);
       } catch (err) {
-        console.error('Failed to fetch data:', err)
-        setError('데이터를 불러오는데 실패했습니다.')
+        console.error("Failed to fetch data:", err);
+        setError("데이터를 불러오는데 실패했습니다.");
       } finally {
-        setLoading(false)
+        setLoading(false);
       }
     }
 
-    fetchData()
-  }, [])
+    fetchData();
+  }, []);
 
   return (
     <div className="min-h-screen bg-background">
@@ -57,13 +66,15 @@ export default function HomePage() {
             <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-primary/60 flex items-center justify-center">
               <span className="text-white font-bold text-sm">K</span>
             </div>
-            <span className="font-semibold">Kuneosu</span>
+            <span className="font-semibold">K Library</span>
           </motion.div>
-          
+
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
+            className="flex items-center gap-4"
           >
+            <AdminPanel />
             <ThemeToggle />
           </motion.div>
         </div>
@@ -72,10 +83,25 @@ export default function HomePage() {
       <main className="container mx-auto px-4 py-8">
         {/* Developer Profile Section */}
         <section className="mb-12">
-          <DeveloperProfile 
-            profile={developerProfile} 
-            projectStats={projectStats}
-          />
+          {loading ? (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="text-center py-12"
+            >
+              <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+              <p className="mt-4 text-muted-foreground">
+                프로필을 불러오는 중...
+              </p>
+            </motion.div>
+          ) : profile ? (
+            <DeveloperProfile profile={profile} projectStats={projectStats} />
+          ) : (
+            <DeveloperProfile
+              profile={developerProfile}
+              projectStats={projectStats}
+            />
+          )}
         </section>
 
         {/* Projects Section */}
@@ -91,7 +117,7 @@ export default function HomePage() {
               다양한 기술과 아이디어로 구현한 사이드 프로젝트들을 살펴보세요.
             </p>
           </motion.div>
-          
+
           {error ? (
             <motion.div
               initial={{ opacity: 0 }}
@@ -113,10 +139,15 @@ export default function HomePage() {
               className="text-center py-12"
             >
               <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
-              <p className="mt-4 text-muted-foreground">프로젝트를 불러오는 중...</p>
+              <p className="mt-4 text-muted-foreground">
+                프로젝트를 불러오는 중...
+              </p>
             </motion.div>
           ) : (
-            <ProjectGrid projects={projects} />
+            <ProjectGrid
+              projects={projects}
+              onProjectUpdated={() => window.location.reload()}
+            />
           )}
         </section>
       </main>
@@ -130,7 +161,8 @@ export default function HomePage() {
             className="text-center text-muted-foreground"
           >
             <p className="mb-2">
-              © 2024 Kuneosu Library. Built with Next.js, TypeScript, and Tailwind CSS.
+              © 2025 Kuneosu Library. Built with Next.js, TypeScript, and
+              Tailwind CSS.
             </p>
             <p className="text-sm">
               지속적으로 학습하고 성장하는 개발자의 여정을 기록합니다.
@@ -138,6 +170,9 @@ export default function HomePage() {
           </motion.div>
         </div>
       </footer>
+
+      {/* Admin Floating Button */}
+      <AddProjectButton />
     </div>
-  )
+  );
 }

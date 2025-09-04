@@ -88,6 +88,71 @@ export interface Database {
           contributors?: number | null
         }
       }
+      developer_profiles: {
+        Row: {
+          id: string
+          name: string
+          title: string
+          bio: string | null
+          email: string
+          github: string | null
+          linkedin: string | null
+          website: string | null
+          career_start_date: string
+          current_focus: string[]
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          name: string
+          title: string
+          bio?: string | null
+          email: string
+          github?: string | null
+          linkedin?: string | null
+          website?: string | null
+          career_start_date: string
+          current_focus: string[]
+        }
+        Update: {
+          id?: string
+          name?: string
+          title?: string
+          bio?: string | null
+          email?: string
+          github?: string | null
+          linkedin?: string | null
+          website?: string | null
+          career_start_date?: string
+          current_focus?: string[]
+        }
+      }
+      skills: {
+        Row: {
+          id: string
+          profile_id: string
+          category: string
+          items: string[]
+          display_order: number
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          profile_id: string
+          category: string
+          items: string[]
+          display_order?: number
+        }
+        Update: {
+          id?: string
+          profile_id?: string
+          category?: string
+          items?: string[]
+          display_order?: number
+        }
+      }
     }
   }
 }

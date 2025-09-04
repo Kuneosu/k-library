@@ -1,5 +1,33 @@
 import { typedSupabase } from './supabase'
-import { Project } from '@/types'
+import { Project, DeveloperProfile as DeveloperProfileType } from '@/types'
+import { Database } from './supabase'
+
+type DeveloperProfileRow = Database['public']['Tables']['developer_profiles']['Row']
+type DeveloperProfileWithSkills = DeveloperProfileRow & {
+  skills: Database['public']['Tables']['skills']['Row'][]
+}
+
+// Supabase 데이터를 DeveloperProfile 타입으로 변환하는 함수
+function mapSupabaseToDeveloperProfile(row: DeveloperProfileWithSkills): DeveloperProfileType {
+  return {
+    name: row.name,
+    title: row.title,
+    bio: row.bio || '',
+    email: row.email,
+    github: row.github || '',
+    linkedin: row.linkedin || undefined,
+    website: row.website || undefined,
+    skills: row.skills
+      .sort((a, b) => a.display_order - b.display_order)
+      .map(skill => ({
+        category: skill.category,
+        items: skill.items
+      })),
+    experience: 0, // Will be calculated from career_start_date
+    projectsCompleted: 0, // Will be calculated from projects
+    currentFocus: row.current_focus
+  }
+}
 
 // Supabase 데이터를 Project 타입으로 변환하는 함수
 function mapSupabaseToProject(row: any): Project {
@@ -255,5 +283,188 @@ export async function getProjectStats() {
   } catch (error) {
     console.error('Error in getProjectStats:', error)
     throw error
+  }
+}
+
+// =========== Developer Profile Functions ===========
+
+// 개발자 프로필과 스킬 정보를 함께 가져오는 함수
+export async function getDeveloperProfileWithSkills(): Promise<DeveloperProfileType | null> {
+  try {
+    // 개발자 프로필과 관련된 스킬을 함께 조회
+    const { data: profileData, error: profileError } = await typedSupabase
+      .from('developer_profiles')
+      .select(`
+        *,
+        skills (*)
+      `)
+      .order('created_at', { ascending: false })
+      .limit(1)
+      .single()
+
+    if (profileError) {
+      console.error('개발자 프로필 조회 실패:', profileError)
+      return null
+    }
+
+    const rawProfile = profileData as DeveloperProfileWithSkills
+    
+    // 완료된 프로젝트 개수 가져오기
+    const { data: completedProjects } = await typedSupabase
+      .from('projects')
+      .select('id')
+      .eq('status', 'Completed')
+
+    // 경력 계산 (career_start_date부터 현재까지)
+    const careerStartDate = new Date(rawProfile.career_start_date)
+    const now = new Date()
+    const diffInYears = (now.getTime() - careerStartDate.getTime()) / (1000 * 60 * 60 * 24 * 365.25)
+    
+    // DeveloperProfile 타입으로 변환
+    const profile = mapSupabaseToDeveloperProfile(rawProfile)
+    profile.experience = Math.max(0, Math.round(diffInYears * 10) / 10) // 소수점 1자리까지
+    profile.projectsCompleted = completedProjects?.length || 0
+    
+    return profile
+  } catch (error) {
+    console.error('개발자 프로필 조회 중 오류:', error)
+    return null
+  }
+}
+
+// 개발자 프로필 생성
+export async function createDeveloperProfile(
+  profile: Database['public']['Tables']['developer_profiles']['Insert']
+): Promise<DeveloperProfileRow | null> {
+  try {
+    const { data, error } = await typedSupabase
+      .from('developer_profiles')
+      .insert(profile as any)
+      .select()
+      .single()
+
+    if (error) {
+      console.error('개발자 프로필 생성 실패:', error)
+      return null
+    }
+
+    return data
+  } catch (error) {
+    console.error('개발자 프로필 생성 중 오류:', error)
+    return null
+  }
+}
+
+// 개발자 프로필 업데이트
+export async function updateDeveloperProfile(
+  id: string,
+  updates: Database['public']['Tables']['developer_profiles']['Update']
+): Promise<DeveloperProfileRow | null> {
+  try {
+    const { data, error } = await typedSupabase
+      .from('developer_profiles')
+      .update(updates as any)
+      .eq('id', id)
+      .select()
+      .single()
+
+    if (error) {
+      console.error('개발자 프로필 업데이트 실패:', error)
+      return null
+    }
+
+    return data
+  } catch (error) {
+    console.error('개발자 프로필 업데이트 중 오류:', error)
+    return null
+  }
+}
+
+// 스킬 생성
+export async function createSkill(
+  skill: Database['public']['Tables']['skills']['Insert']
+): Promise<Database['public']['Tables']['skills']['Row'] | null> {
+  try {
+    const { data, error } = await typedSupabase
+      .from('skills')
+      .insert(skill)
+      .select()
+      .single()
+
+    if (error) {
+      console.error('스킬 생성 실패:', error)
+      return null
+    }
+
+    return data
+  } catch (error) {
+    console.error('스킬 생성 중 오류:', error)
+    return null
+  }
+}
+
+// 스킬 업데이트
+export async function updateSkill(
+  id: string,
+  updates: Database['public']['Tables']['skills']['Update']
+): Promise<Database['public']['Tables']['skills']['Row'] | null> {
+  try {
+    const { data, error } = await typedSupabase
+      .from('skills')
+      .update(updates)
+      .eq('id', id)
+      .select()
+      .single()
+
+    if (error) {
+      console.error('스킬 업데이트 실패:', error)
+      return null
+    }
+
+    return data
+  } catch (error) {
+    console.error('스킬 업데이트 중 오류:', error)
+    return null
+  }
+}
+
+// 스킬 삭제
+export async function deleteSkill(id: string): Promise<boolean> {
+  try {
+    const { error } = await typedSupabase
+      .from('skills')
+      .delete()
+      .eq('id', id)
+
+    if (error) {
+      console.error('스킬 삭제 실패:', error)
+      return false
+    }
+
+    return true
+  } catch (error) {
+    console.error('스킬 삭제 중 오류:', error)
+    return false
+  }
+}
+
+// 프로필별 스킬 조회
+export async function getSkillsByProfile(profileId: string) {
+  try {
+    const { data, error } = await typedSupabase
+      .from('skills')
+      .select('*')
+      .eq('profile_id', profileId)
+      .order('display_order')
+
+    if (error) {
+      console.error('스킬 조회 실패:', error)
+      return []
+    }
+
+    return data
+  } catch (error) {
+    console.error('스킬 조회 중 오류:', error)
+    return []
   }
 }

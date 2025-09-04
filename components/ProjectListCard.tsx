@@ -5,7 +5,7 @@ import { Github, ExternalLink, Package, Calendar, Star, Download, Users, Eye, Ed
 import { Project } from '@/types'
 import { useAuth } from '@/contexts/AuthContext'
 
-interface ProjectCardProps {
+interface ProjectListCardProps {
   project: Project
   index: number
   onViewDetails: (project: Project) => void
@@ -31,7 +31,7 @@ const categoryColors = {
   'Other': 'bg-gray-500',
 }
 
-export default function ProjectCard({ project, index, onViewDetails, onEdit, onDelete }: ProjectCardProps) {
+export default function ProjectListCard({ project, index, onViewDetails, onEdit, onDelete }: ProjectListCardProps) {
   const { isAdmin } = useAuth()
   const links = [
     { icon: Github, url: project.githubUrl, label: 'GitHub' },
@@ -48,7 +48,6 @@ export default function ProjectCard({ project, index, onViewDetails, onEdit, onD
       className="group bg-card border border-border rounded-xl p-6 hover:shadow-xl transition-all duration-300 cursor-pointer"
       onClick={() => onViewDetails(project)}
     >
-      
       {/* Header */}
       <div className="flex items-start justify-between mb-4">
         <div className="flex-1">
