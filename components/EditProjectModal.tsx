@@ -310,6 +310,7 @@ export default function EditProjectModal({ project, onClose, onSuccess }: EditPr
                   type="date"
                   value={formData.endDate}
                   onChange={(e) => handleInputChange('endDate', e.target.value)}
+                  min={formData.startDate}
                   className="w-full px-3 py-2 border border-border rounded-lg bg-background focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
                 />
               </div>

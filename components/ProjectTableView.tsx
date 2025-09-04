@@ -17,11 +17,11 @@ type SortField = 'name' | 'category' | 'status' | 'startDate' | 'version' | 'sta
 type SortDirection = 'asc' | 'desc'
 
 const statusColors = {
-  'Active': 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300',
-  'In Progress': 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300',
-  'Completed': 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300',
-  'Maintenance': 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300',
-  'Archived': 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300',
+  '진행중': 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300',
+  '개발중': 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300',
+  '완료': 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300',
+  '유지보수': 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300',
+  '보관': 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300',
 }
 
 const categoryColors = {
@@ -189,7 +189,20 @@ export default function ProjectTableView({ projects, onViewDetails, onEdit, onDe
                 <div className="col-span-1">
                   <div className="flex items-center gap-1 text-sm text-muted-foreground">
                     <Calendar className="w-3 h-3" />
-                    {new Date(project.startDate).getFullYear()}
+                    <span className="text-xs">
+                      {new Date(project.startDate).toLocaleDateString('ko-KR', {
+                        year: 'numeric',
+                        month: '2-digit',
+                        day: '2-digit'
+                      }).replace(/\./g, '.').replace(/ /g, '')}
+                      {project.endDate && (
+                        <> ~ {new Date(project.endDate).toLocaleDateString('ko-KR', {
+                          year: 'numeric',
+                          month: '2-digit', 
+                          day: '2-digit'
+                        }).replace(/\./g, '.').replace(/ /g, '')}</>
+                      )}
+                    </span>
                   </div>
                 </div>
 

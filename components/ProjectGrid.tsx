@@ -24,6 +24,8 @@ export default function ProjectGrid({ projects, onProjectUpdated }: ProjectGridP
   const [selectedCategory, setSelectedCategory] = useState<ProjectCategory | 'All'>('All')
   const [selectedStatus, setSelectedStatus] = useState<ProjectStatus | 'All'>('All')
   const [selectedTech, setSelectedTech] = useState<string[]>([])
+  const [startDateFilter, setStartDateFilter] = useState('')
+  const [endDateFilter, setEndDateFilter] = useState('')
   const [selectedProject, setSelectedProject] = useState<Project | null>(null)
   const [editingProject, setEditingProject] = useState<Project | null>(null)
   const [deletingProject, setDeletingProject] = useState<Project | null>(null)
@@ -73,9 +75,26 @@ export default function ProjectGrid({ projects, onProjectUpdated }: ProjectGridP
         }
       }
 
+      // Date filter
+      if (startDateFilter) {
+        const projectStart = new Date(project.startDate)
+        const filterStart = new Date(startDateFilter)
+        if (projectStart < filterStart) {
+          return false
+        }
+      }
+
+      if (endDateFilter) {
+        const projectEnd = project.endDate ? new Date(project.endDate) : new Date(project.startDate)
+        const filterEnd = new Date(endDateFilter)
+        if (projectEnd > filterEnd) {
+          return false
+        }
+      }
+
       return true
     })
-  }, [projects, searchQuery, selectedCategory, selectedStatus, selectedTech])
+  }, [projects, searchQuery, selectedCategory, selectedStatus, selectedTech, startDateFilter, endDateFilter])
 
   return (
     <div>
@@ -89,6 +108,10 @@ export default function ProjectGrid({ projects, onProjectUpdated }: ProjectGridP
         selectedTech={selectedTech}
         setSelectedTech={setSelectedTech}
         availableTech={availableTech}
+        startDateFilter={startDateFilter}
+        setStartDateFilter={setStartDateFilter}
+        endDateFilter={endDateFilter}
+        setEndDateFilter={setEndDateFilter}
       />
 
       {/* Results count and View Toggle */}

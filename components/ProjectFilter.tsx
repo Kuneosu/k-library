@@ -14,6 +14,10 @@ interface ProjectFilterProps {
   selectedTech: string[]
   setSelectedTech: (tech: string[]) => void
   availableTech: string[]
+  startDateFilter: string
+  setStartDateFilter: (date: string) => void
+  endDateFilter: string
+  setEndDateFilter: (date: string) => void
 }
 
 const categories: (ProjectCategory | 'All')[] = ['All', 'Web', 'Mobile', 'Library', 'API', 'Tool', 'Game', 'Other']
@@ -29,15 +33,21 @@ export default function ProjectFilter({
   selectedTech,
   setSelectedTech,
   availableTech,
+  startDateFilter,
+  setStartDateFilter,
+  endDateFilter,
+  setEndDateFilter,
 }: ProjectFilterProps) {
   const clearFilters = () => {
     setSearchQuery('')
     setSelectedCategory('All')
     setSelectedStatus('All')
     setSelectedTech([])
+    setStartDateFilter('')
+    setEndDateFilter('')
   }
 
-  const hasFilters = searchQuery || selectedCategory !== 'All' || selectedStatus !== 'All' || selectedTech.length > 0
+  const hasFilters = searchQuery || selectedCategory !== 'All' || selectedStatus !== 'All' || selectedTech.length > 0 || startDateFilter || endDateFilter
 
   const toggleTech = (tech: string) => {
     setSelectedTech(
@@ -128,6 +138,29 @@ export default function ProjectFilter({
                 </motion.button>
               ))}
             </div>
+          </div>
+        </div>
+
+        {/* Date Filter */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label className="block text-sm font-medium mb-2">시작일</label>
+            <input
+              type="date"
+              value={startDateFilter}
+              onChange={(e) => setStartDateFilter(e.target.value)}
+              className="w-full px-4 py-2 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-2">종료일</label>
+            <input
+              type="date"
+              value={endDateFilter}
+              onChange={(e) => setEndDateFilter(e.target.value)}
+              min={startDateFilter}
+              className="w-full px-4 py-2 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors"
+            />
           </div>
         </div>
 
