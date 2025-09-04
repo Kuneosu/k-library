@@ -52,10 +52,6 @@ export default function ProjectListCard({ project, index, onViewDetails, onEdit,
       <div className="flex items-start justify-between mb-4">
         <div className="flex-1">
           <div className="flex items-center gap-2 mb-2">
-            <div 
-              className={`w-3 h-3 rounded-full ${categoryColors[project.category]}`}
-              title={project.category}
-            />
             <h3 className="text-lg font-semibold group-hover:text-primary transition-colors">
               {project.name}
             </h3>

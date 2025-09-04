@@ -24,8 +24,9 @@ export default function ProjectGrid({ projects, onProjectUpdated }: ProjectGridP
   const [selectedCategory, setSelectedCategory] = useState<ProjectCategory | 'All'>('All')
   const [selectedStatus, setSelectedStatus] = useState<ProjectStatus | 'All'>('All')
   const [selectedTech, setSelectedTech] = useState<string[]>([])
-  const [startDateFilter, setStartDateFilter] = useState('')
-  const [endDateFilter, setEndDateFilter] = useState('')
+  const [selectedYear, setSelectedYear] = useState('')
+  const [selectedMonth, setSelectedMonth] = useState('')
+  const [selectedDay, setSelectedDay] = useState('')
   const [selectedProject, setSelectedProject] = useState<Project | null>(null)
   const [editingProject, setEditingProject] = useState<Project | null>(null)
   const [deletingProject, setDeletingProject] = useState<Project | null>(null)
@@ -75,26 +76,37 @@ export default function ProjectGrid({ projects, onProjectUpdated }: ProjectGridP
         }
       }
 
-      // Date filter
-      if (startDateFilter) {
+      // Date filter - check if selected date components match project's start or end date
+      if (selectedYear || selectedMonth || selectedDay) {
         const projectStart = new Date(project.startDate)
-        const filterStart = new Date(startDateFilter)
-        if (projectStart < filterStart) {
-          return false
+        const projectEnd = project.endDate ? new Date(project.endDate) : null
+        
+        // Helper function to check if a date matches the selected components
+        const matchesDateComponents = (date: Date) => {
+          if (selectedYear && date.getFullYear().toString() !== selectedYear) {
+            return false
+          }
+          if (selectedMonth && (date.getMonth() + 1).toString().padStart(2, '0') !== selectedMonth) {
+            return false
+          }
+          if (selectedDay && date.getDate().toString().padStart(2, '0') !== selectedDay) {
+            return false
+          }
+          return true
         }
-      }
-
-      if (endDateFilter) {
-        const projectEnd = project.endDate ? new Date(project.endDate) : new Date(project.startDate)
-        const filterEnd = new Date(endDateFilter)
-        if (projectEnd > filterEnd) {
+        
+        // Check if either start date or end date matches the filter
+        const startMatches = matchesDateComponents(projectStart)
+        const endMatches = projectEnd ? matchesDateComponents(projectEnd) : false
+        
+        if (!startMatches && !endMatches) {
           return false
         }
       }
 
       return true
     })
-  }, [projects, searchQuery, selectedCategory, selectedStatus, selectedTech, startDateFilter, endDateFilter])
+  }, [projects, searchQuery, selectedCategory, selectedStatus, selectedTech, selectedYear, selectedMonth, selectedDay])
 
   return (
     <div>
@@ -108,10 +120,12 @@ export default function ProjectGrid({ projects, onProjectUpdated }: ProjectGridP
         selectedTech={selectedTech}
         setSelectedTech={setSelectedTech}
         availableTech={availableTech}
-        startDateFilter={startDateFilter}
-        setStartDateFilter={setStartDateFilter}
-        endDateFilter={endDateFilter}
-        setEndDateFilter={setEndDateFilter}
+        selectedYear={selectedYear}
+        setSelectedYear={setSelectedYear}
+        selectedMonth={selectedMonth}
+        setSelectedMonth={setSelectedMonth}
+        selectedDay={selectedDay}
+        setSelectedDay={setSelectedDay}
       />
 
       {/* Results count and View Toggle */}
@@ -192,6 +206,9 @@ export default function ProjectGrid({ projects, onProjectUpdated }: ProjectGridP
                 setSelectedCategory('All')
                 setSelectedStatus('All')
                 setSelectedTech([])
+                setSelectedYear('')
+                setSelectedMonth('')
+                setSelectedDay('')
               }}
               className="text-primary hover:underline"
               whileHover={{ scale: 1.05 }}

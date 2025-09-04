@@ -146,7 +146,6 @@ export default function ProjectTableView({ projects, onViewDetails, onEdit, onDe
                 {/* Project Name */}
                 <div className="col-span-3">
                   <div className="flex items-center gap-2">
-                    <div className={`w-2 h-2 rounded-full ${categoryColors[project.category]}`} />
                     <div>
                       <h3 className="font-medium text-foreground line-clamp-1">{project.name}</h3>
                       <p className="text-sm text-muted-foreground line-clamp-1">{project.description}</p>

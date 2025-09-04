@@ -14,10 +14,12 @@ interface ProjectFilterProps {
   selectedTech: string[]
   setSelectedTech: (tech: string[]) => void
   availableTech: string[]
-  startDateFilter: string
-  setStartDateFilter: (date: string) => void
-  endDateFilter: string
-  setEndDateFilter: (date: string) => void
+  selectedYear: string
+  setSelectedYear: (year: string) => void
+  selectedMonth: string
+  setSelectedMonth: (month: string) => void
+  selectedDay: string
+  setSelectedDay: (day: string) => void
 }
 
 const categories: (ProjectCategory | 'All')[] = ['All', 'Web', 'Mobile', 'Library', 'API', 'Tool', 'Game', 'Other']
@@ -33,21 +35,24 @@ export default function ProjectFilter({
   selectedTech,
   setSelectedTech,
   availableTech,
-  startDateFilter,
-  setStartDateFilter,
-  endDateFilter,
-  setEndDateFilter,
+  selectedYear,
+  setSelectedYear,
+  selectedMonth,
+  setSelectedMonth,
+  selectedDay,
+  setSelectedDay,
 }: ProjectFilterProps) {
   const clearFilters = () => {
     setSearchQuery('')
     setSelectedCategory('All')
     setSelectedStatus('All')
     setSelectedTech([])
-    setStartDateFilter('')
-    setEndDateFilter('')
+    setSelectedYear('')
+    setSelectedMonth('')
+    setSelectedDay('')
   }
 
-  const hasFilters = searchQuery || selectedCategory !== 'All' || selectedStatus !== 'All' || selectedTech.length > 0 || startDateFilter || endDateFilter
+  const hasFilters = searchQuery || selectedCategory !== 'All' || selectedStatus !== 'All' || selectedTech.length > 0 || selectedYear || selectedMonth || selectedDay
 
   const toggleTech = (tech: string) => {
     setSelectedTech(
@@ -142,25 +147,63 @@ export default function ProjectFilter({
         </div>
 
         {/* Date Filter */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div>
-            <label className="block text-sm font-medium mb-2">시작일</label>
-            <input
-              type="date"
-              value={startDateFilter}
-              onChange={(e) => setStartDateFilter(e.target.value)}
-              className="w-full px-4 py-2 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium mb-2">종료일</label>
-            <input
-              type="date"
-              value={endDateFilter}
-              onChange={(e) => setEndDateFilter(e.target.value)}
-              min={startDateFilter}
-              className="w-full px-4 py-2 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors"
-            />
+        <div>
+          <label className="block text-sm font-medium mb-2">날짜 필터</label>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div>
+              <label className="block text-xs text-muted-foreground mb-1">연도</label>
+              <select
+                value={selectedYear}
+                onChange={(e) => setSelectedYear(e.target.value)}
+                className="w-full px-3 py-2 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors text-sm"
+              >
+                <option value="">전체</option>
+                {Array.from({ length: 10 }, (_, i) => {
+                  const year = new Date().getFullYear() - i
+                  return (
+                    <option key={year} value={year.toString()}>
+                      {year}년
+                    </option>
+                  )
+                })}
+              </select>
+            </div>
+            <div>
+              <label className="block text-xs text-muted-foreground mb-1">월</label>
+              <select
+                value={selectedMonth}
+                onChange={(e) => setSelectedMonth(e.target.value)}
+                className="w-full px-3 py-2 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors text-sm"
+              >
+                <option value="">전체</option>
+                {Array.from({ length: 12 }, (_, i) => {
+                  const month = (i + 1).toString().padStart(2, '0')
+                  return (
+                    <option key={month} value={month}>
+                      {i + 1}월
+                    </option>
+                  )
+                })}
+              </select>
+            </div>
+            <div>
+              <label className="block text-xs text-muted-foreground mb-1">일</label>
+              <select
+                value={selectedDay}
+                onChange={(e) => setSelectedDay(e.target.value)}
+                className="w-full px-3 py-2 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors text-sm"
+              >
+                <option value="">전체</option>
+                {Array.from({ length: 31 }, (_, i) => {
+                  const day = (i + 1).toString().padStart(2, '0')
+                  return (
+                    <option key={day} value={day}>
+                      {i + 1}일
+                    </option>
+                  )
+                })}
+              </select>
+            </div>
           </div>
         </div>
 

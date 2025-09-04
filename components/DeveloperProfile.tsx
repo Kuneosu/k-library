@@ -1,9 +1,11 @@
 "use client"
 
 import { motion } from 'framer-motion'
-import { Github, Linkedin, Twitter, Globe, Mail, Code2, Calendar, Award, Copy, Check } from 'lucide-react'
+import { Github, Linkedin, Twitter, Globe, Mail, Code2, Calendar, Award, Copy, Check, Edit2 } from 'lucide-react'
 import { useState } from 'react'
 import { DeveloperProfile as ProfileType } from '@/types'
+import { useAuth } from '@/contexts/AuthContext'
+import EditProfileModal from './EditProfileModal'
 
 interface DeveloperProfileProps {
   profile: ProfileType
@@ -13,9 +15,10 @@ interface DeveloperProfileProps {
     completed: number
     maintenance: number
   }
+  onProfileUpdated?: () => void
 }
 
-export default function DeveloperProfile({ profile, projectStats }: DeveloperProfileProps) {
+export default function DeveloperProfile({ profile, projectStats, onProfileUpdated }: DeveloperProfileProps) {
   // Experience는 이미 데이터베이스에서 계산되어 전달됨
   const experienceText = profile.experience < 1 
     ? `${Math.floor(profile.experience * 12)}개월`
@@ -25,6 +28,8 @@ export default function DeveloperProfile({ profile, projectStats }: DeveloperPro
   
   const [showEmailPopup, setShowEmailPopup] = useState(false)
   const [emailCopied, setEmailCopied] = useState(false)
+  const [editingProfile, setEditingProfile] = useState(false)
+  const { isAdmin } = useAuth()
   
   const handleEmailClick = () => {
     setShowEmailPopup(true)
@@ -62,6 +67,22 @@ export default function DeveloperProfile({ profile, projectStats }: DeveloperPro
     >
       {/* Background decoration */}
       <div className="absolute inset-0 bg-grid-pattern opacity-5" />
+      
+      {/* Admin Edit Button */}
+      {isAdmin && (
+        <motion.button
+          onClick={() => setEditingProfile(true)}
+          className="absolute top-6 right-6 z-20 p-3 bg-background/80 backdrop-blur-sm border border-border rounded-xl hover:bg-background/90 transition-colors group"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.5 }}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          title="프로필 수정"
+        >
+          <Edit2 className="w-5 h-5 text-primary group-hover:text-primary/80" />
+        </motion.button>
+      )}
       
       <div className="relative z-10">
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
@@ -183,21 +204,21 @@ export default function DeveloperProfile({ profile, projectStats }: DeveloperPro
               delay={0.6}
             />
             <StatCard
+              icon={Code2}
+              label="진행 중"
+              value={projectStats.active}
+              delay={0.7}
+            />
+            <StatCard
               icon={Award}
               label="완료된 프로젝트"
               value={projectStats.completed}
-              delay={0.7}
+              delay={0.8}
             />
             <StatCard
               icon={Calendar}
               label="경력"
               value={experienceText}
-              delay={0.8}
-            />
-            <StatCard
-              icon={Code2}
-              label="진행 중"
-              value={projectStats.active}
               delay={0.9}
             />
           </motion.div>
@@ -295,6 +316,16 @@ export default function DeveloperProfile({ profile, projectStats }: DeveloperPro
           </motion.div>
         </motion.div>
       )}
+
+      {/* Edit Profile Modal */}
+      <EditProfileModal
+        profile={editingProfile ? profile : null}
+        onClose={() => setEditingProfile(false)}
+        onSuccess={() => {
+          setEditingProfile(false)
+          onProfileUpdated?.()
+        }}
+      />
     </motion.section>
   )
 }
