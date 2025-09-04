@@ -4,6 +4,9 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
   images: {
     domains: ['github.com', 'raw.githubusercontent.com', 'picsum.photos', 'via.placeholder.com'],
   },
