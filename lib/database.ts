@@ -10,6 +10,7 @@ type DeveloperProfileWithSkills = DeveloperProfileRow & {
 // Supabase 데이터를 DeveloperProfile 타입으로 변환하는 함수
 function mapSupabaseToDeveloperProfile(row: DeveloperProfileWithSkills): DeveloperProfileType {
   return {
+    id: row.id,
     name: row.name,
     title: row.title,
     bio: row.bio || '',
@@ -17,6 +18,7 @@ function mapSupabaseToDeveloperProfile(row: DeveloperProfileWithSkills): Develop
     github: row.github || '',
     linkedin: row.linkedin || undefined,
     website: row.website || undefined,
+    location: '', // Not in database schema
     skills: row.skills
       .sort((a, b) => a.display_order - b.display_order)
       .map(skill => ({
@@ -445,6 +447,71 @@ export async function deleteSkill(id: string): Promise<boolean> {
   } catch (error) {
     console.error('스킬 삭제 중 오류:', error)
     return false
+  }
+}
+
+// 프로필 업데이트 (프로젝트와 동일한 방식)
+export async function updateDeveloperProfileWithSkills(
+  profileId: string,
+  profileData: Partial<DeveloperProfileType>
+): Promise<DeveloperProfileType | null> {
+  try {
+    // 1. 프로필 기본 정보 업데이트
+    const { error: profileError } = await typedSupabase
+      .from('developer_profiles')
+      .update({
+        name: profileData.name,
+        title: profileData.title,
+        bio: profileData.bio,
+        email: profileData.email,
+        github: profileData.github,
+        linkedin: profileData.linkedin,
+        website: profileData.website,
+        current_focus: profileData.currentFocus,
+        updated_at: new Date().toISOString()
+      })
+      .eq('id', profileId)
+
+    if (profileError) {
+      console.error('프로필 업데이트 실패:', profileError)
+      return null
+    }
+
+    // 2. 기존 스킬 삭제
+    const { error: deleteSkillsError } = await typedSupabase
+      .from('skills')
+      .delete()
+      .eq('profile_id', profileId)
+
+    if (deleteSkillsError) {
+      console.error('기존 스킬 삭제 실패:', deleteSkillsError)
+      return null
+    }
+
+    // 3. 새 스킬 추가
+    if (profileData.skills && profileData.skills.length > 0) {
+      const skillsData = profileData.skills.map((skillGroup, index) => ({
+        profile_id: profileId,
+        category: skillGroup.category,
+        items: skillGroup.items,
+        display_order: index + 1
+      }))
+
+      const { error: skillsError } = await typedSupabase
+        .from('skills')
+        .insert(skillsData)
+
+      if (skillsError) {
+        console.error('새 스킬 추가 실패:', skillsError)
+        return null
+      }
+    }
+
+    // 4. 업데이트된 프로필 반환
+    return await getDeveloperProfileWithSkills()
+  } catch (error) {
+    console.error('프로필 업데이트 중 오류:', error)
+    return null
   }
 }
 

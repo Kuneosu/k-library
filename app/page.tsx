@@ -95,7 +95,14 @@ export default function HomePage() {
               </p>
             </motion.div>
           ) : profile ? (
-            <DeveloperProfile profile={profile} projectStats={projectStats} />
+            <DeveloperProfile 
+              profile={profile} 
+              projectStats={projectStats} 
+              onProfileUpdated={async () => {
+                const updatedProfile = await getDeveloperProfileWithSkills()
+                setProfile(updatedProfile)
+              }} 
+            />
           ) : (
             <DeveloperProfile
               profile={developerProfile}

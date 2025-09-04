@@ -31,6 +31,7 @@ export interface Project {
 }
 
 export interface DeveloperProfile {
+  id: string
   name: string
   title: string
   bio: string
@@ -40,6 +41,7 @@ export interface DeveloperProfile {
   linkedin?: string
   twitter?: string
   website?: string
+  location?: string
   skills: {
     category: string
     items: string[]

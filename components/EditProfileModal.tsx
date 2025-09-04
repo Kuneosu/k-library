@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, Save, Plus, Trash2 } from 'lucide-react'
 import { DeveloperProfile } from '@/types'
+import { updateDeveloperProfileWithSkills } from '@/lib/database'
 
 interface EditProfileModalProps {
   profile: DeveloperProfile | null
@@ -38,9 +39,18 @@ export default function EditProfileModal({ profile, onClose, onSuccess }: EditPr
 
   useEffect(() => {
     if (profile) {
-      setFormData(profile)
-      setSkillGroups(profile.skills)
-      setCurrentFocusItems(profile.currentFocus)
+      setFormData({
+        ...profile,
+        name: profile.name || '',
+        title: profile.title || '',
+        bio: profile.bio || '',
+        email: profile.email || '',
+        github: profile.github || '',
+        linkedin: profile.linkedin || '',
+        website: profile.website || ''
+      })
+      setSkillGroups(profile.skills || [])
+      setCurrentFocusItems(profile.currentFocus || [])
     }
   }, [profile])
 
@@ -55,13 +65,11 @@ export default function EditProfileModal({ profile, onClose, onSuccess }: EditPr
         currentFocus: currentFocusItems
       }
 
-      const response = await fetch('/api/developer-profile', {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(updatedProfile)
-      })
+      const result = await updateDeveloperProfileWithSkills(formData.id, updatedProfile)
 
-      if (!response.ok) throw new Error('프로필 업데이트에 실패했습니다')
+      if (!result) {
+        throw new Error('프로필 업데이트에 실패했습니다')
+      }
 
       onSuccess()
       onClose()
@@ -227,28 +235,6 @@ export default function EditProfileModal({ profile, onClose, onSuccess }: EditPr
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-sm font-medium mb-2">위치</label>
-                <input
-                  type="text"
-                  value={formData.location}
-                  onChange={(e) => setFormData({ ...formData, location: e.target.value })}
-                  className="w-full px-4 py-2 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium mb-2">경력 (년)</label>
-                <input
-                  type="number"
-                  step="0.1"
-                  min="0"
-                  value={formData.experience}
-                  onChange={(e) => setFormData({ ...formData, experience: parseFloat(e.target.value) || 0 })}
-                  className="w-full px-4 py-2 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors"
-                />
-              </div>
-            </div>
 
             {/* Current Focus */}
             <div>
