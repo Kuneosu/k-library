@@ -13,7 +13,7 @@ interface AddProjectModalProps {
 }
 
 const categories: ProjectCategory[] = ['Web', 'Mobile', 'Library', 'API', 'Tool', 'Game', 'Other']
-const statuses: ProjectStatus[] = ['Active', 'In Progress', 'Completed', 'Maintenance', 'Archived']
+const statuses: ProjectStatus[] = ['진행중', '개발중', '완료', '유지보수', '보관']
 const sizes: ProjectSize[] = ['Small', 'Medium', 'Large', 'Enterprise']
 
 export default function AddProjectModal({ isOpen, onClose, onSuccess }: AddProjectModalProps) {

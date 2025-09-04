@@ -12,7 +12,7 @@ CREATE TABLE projects (
     end_date DATE,
     version TEXT NOT NULL DEFAULT '1.0.0',
     category TEXT NOT NULL CHECK (category IN ('Web', 'Mobile', 'Library', 'API', 'Tool', 'Game', 'Other')),
-    status TEXT NOT NULL CHECK (status IN ('Active', 'In Progress', 'Completed', 'Maintenance', 'Archived')),
+    status TEXT NOT NULL CHECK (status IN ('진행중', '개발중', '완료', '유지보수', '보관')),
     size TEXT NOT NULL CHECK (size IN ('Small', 'Medium', 'Large', 'Enterprise')),
     github_url TEXT,
     vercel_url TEXT,

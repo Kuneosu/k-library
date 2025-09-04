@@ -1,6 +1,6 @@
 export type ProjectCategory = 'Web' | 'Mobile' | 'Library' | 'API' | 'Tool' | 'Game' | 'Other'
 
-export type ProjectStatus = 'Active' | 'In Progress' | 'Completed' | 'Maintenance' | 'Archived'
+export type ProjectStatus = '진행중' | '개발중' | '완료' | '유지보수' | '보관'
 
 export type ProjectSize = 'Small' | 'Medium' | 'Large' | 'Enterprise'
 

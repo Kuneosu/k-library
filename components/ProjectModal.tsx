@@ -14,19 +14,19 @@ interface ProjectModalProps {
 }
 
 const statusIcons = {
-  'Active': CheckCircle,
-  'In Progress': Clock,
-  'Completed': CheckCircle,
-  'Maintenance': AlertCircle,
-  'Archived': X,
+  '진행중': CheckCircle,
+  '개발중': Clock,
+  '완료': CheckCircle,
+  '유지보수': AlertCircle,
+  '보관': X,
 }
 
 const statusColors = {
-  'Active': 'text-green-500',
-  'In Progress': 'text-blue-500',
-  'Completed': 'text-gray-500',
-  'Maintenance': 'text-yellow-500',
-  'Archived': 'text-red-500',
+  '진행중': 'text-green-500',
+  '개발중': 'text-blue-500',
+  '완료': 'text-gray-500',
+  '유지보수': 'text-yellow-500',
+  '보관': 'text-red-500',
 }
 
 export default function ProjectModal({ project, onClose }: ProjectModalProps) {
@@ -64,7 +64,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
-            className="bg-card border border-border rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden"
+            className="bg-card border border-border rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] flex flex-col"
             onClick={(e) => e.stopPropagation()}
           >
           {/* Header */}
@@ -94,7 +94,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
           </div>
 
           {/* Content */}
-          <div className="overflow-y-auto max-h-[calc(90vh-80px)]">
+          <div className="flex-1 overflow-y-auto">
             <div className="p-6 space-y-6">
               {/* Project Screenshots */}
               {project.screenshots.length > 0 && (

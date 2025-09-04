@@ -17,7 +17,7 @@ interface ProjectFilterProps {
 }
 
 const categories: (ProjectCategory | 'All')[] = ['All', 'Web', 'Mobile', 'Library', 'API', 'Tool', 'Game', 'Other']
-const statuses: (ProjectStatus | 'All')[] = ['All', 'Active', 'In Progress', 'Completed', 'Maintenance', 'Archived']
+const statuses: (ProjectStatus | 'All')[] = ['All', '진행중', '개발중', '완료', '유지보수', '보관']
 
 export default function ProjectFilter({
   searchQuery,
