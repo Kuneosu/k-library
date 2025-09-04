@@ -1,12 +1,13 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import DeveloperProfile from "@/components/DeveloperProfile";
 import ProjectGrid from "@/components/ProjectGrid";
 import ThemeToggle from "@/components/ThemeToggle";
 import AdminPanel from "@/components/AdminPanel";
 import AddProjectButton from "@/components/AddProjectButton";
+import HeaderSocialLinks from "@/components/HeaderSocialLinks";
 import { developerProfile } from "@/data/mockData";
 import {
   getAllProjects,
@@ -28,6 +29,8 @@ export default function HomePage() {
   const [profile, setProfile] = useState<DeveloperProfileType | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [showSocialLinks, setShowSocialLinks] = useState(false);
+  const profileRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     async function fetchData() {
@@ -53,6 +56,24 @@ export default function HomePage() {
     fetchData();
   }, []);
 
+  // 스크롤 감지로 소셜 링크 표시/숨김 처리
+  useEffect(() => {
+    const handleScroll = () => {
+      if (profileRef.current) {
+        const profileRect = profileRef.current.getBoundingClientRect();
+        // 프로필 섹션의 중간 정도가 화면 상단에 위치했을 때 소셜 링크 표시
+        const shouldShow = profileRect.top < -200;
+        setShowSocialLinks(shouldShow);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    // 초기 상태 확인
+    handleScroll();
+
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <div className="min-h-screen bg-background">
       {/* Header with Theme Toggle */}
@@ -74,6 +95,7 @@ export default function HomePage() {
             animate={{ opacity: 1, x: 0 }}
             className="flex items-center gap-4"
           >
+            <HeaderSocialLinks profile={profile} isVisible={showSocialLinks} />
             <AdminPanel />
             <ThemeToggle />
           </motion.div>
@@ -82,7 +104,7 @@ export default function HomePage() {
 
       <main className="container mx-auto px-4 py-8">
         {/* Developer Profile Section */}
-        <section className="mb-12">
+        <section ref={profileRef} className="mb-12">
           {loading ? (
             <motion.div
               initial={{ opacity: 0 }}
