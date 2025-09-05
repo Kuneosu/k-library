@@ -9,6 +9,7 @@ import ProjectGalleryCard from './ProjectGalleryCard'
 import ProjectTableView from './ProjectTableView'
 import ProjectViewToggle, { ViewMode } from './ProjectViewToggle'
 import ProjectFilter from './ProjectFilter'
+import ProjectSort, { SortOption } from './ProjectSort'
 import ProjectModal from './ProjectModal'
 import EditProjectModal from './EditProjectModal'
 import DeleteProjectModal from './DeleteProjectModal'
@@ -27,6 +28,7 @@ export default function ProjectGrid({ projects, onProjectUpdated }: ProjectGridP
   const [selectedYear, setSelectedYear] = useState('')
   const [selectedMonth, setSelectedMonth] = useState('')
   const [selectedDay, setSelectedDay] = useState('')
+  const [sortBy, setSortBy] = useState<SortOption>('date-desc')
   const [selectedProject, setSelectedProject] = useState<Project | null>(null)
   const [editingProject, setEditingProject] = useState<Project | null>(null)
   const [deletingProject, setDeletingProject] = useState<Project | null>(null)
@@ -40,9 +42,9 @@ export default function ProjectGrid({ projects, onProjectUpdated }: ProjectGridP
     return Array.from(techSet).sort()
   }, [projects])
 
-  // Filter projects based on current filters
-  const filteredProjects = useMemo(() => {
-    return projects.filter(project => {
+  // Filter and sort projects based on current filters and sort option
+  const filteredAndSortedProjects = useMemo(() => {
+    const filtered = projects.filter(project => {
       // Search query filter
       if (searchQuery) {
         const query = searchQuery.toLowerCase()
@@ -106,7 +108,42 @@ export default function ProjectGrid({ projects, onProjectUpdated }: ProjectGridP
 
       return true
     })
-  }, [projects, searchQuery, selectedCategory, selectedStatus, selectedTech, selectedYear, selectedMonth, selectedDay])
+
+    // Sort filtered projects
+    const sorted = [...filtered].sort((a, b) => {
+      switch (sortBy) {
+        case 'date-desc': {
+          // 최신순 (시작일 기준)
+          const dateA = new Date(a.startDate).getTime()
+          const dateB = new Date(b.startDate).getTime()
+          return dateB - dateA
+        }
+        case 'date-asc': {
+          // 오래된순 (시작일 기준)
+          const dateA = new Date(a.startDate).getTime()
+          const dateB = new Date(b.startDate).getTime()
+          return dateA - dateB
+        }
+        case 'downloads': {
+          // 다운로드 많은 순
+          const downloadsA = a.downloads || 0
+          const downloadsB = b.downloads || 0
+          return downloadsB - downloadsA
+        }
+        case 'name': {
+          // 이름순
+          return a.name.localeCompare(b.name, 'ko-KR')
+        }
+        default:
+          return 0
+      }
+    })
+
+    return sorted
+  }, [projects, searchQuery, selectedCategory, selectedStatus, selectedTech, selectedYear, selectedMonth, selectedDay, sortBy])
+
+  // For backward compatibility, keep filteredProjects as an alias
+  const filteredProjects = filteredAndSortedProjects
 
   return (
     <div>
@@ -140,7 +177,10 @@ export default function ProjectGrid({ projects, onProjectUpdated }: ProjectGridP
             <span> (총 {projects.length}개 중)</span>
           )}
         </p>
-        <ProjectViewToggle viewMode={viewMode} onViewModeChange={setViewMode} />
+        <div className="flex items-center gap-4">
+          <ProjectSort sortBy={sortBy} onSortChange={setSortBy} />
+          <ProjectViewToggle viewMode={viewMode} onViewModeChange={setViewMode} />
+        </div>
       </motion.div>
 
       {/* Project Views */}
