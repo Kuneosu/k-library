@@ -263,19 +263,19 @@ export async function getProjectStats() {
 
     data.forEach((project: { status: string }) => {
       switch (project.status) {
-        case 'Active':
+        case '진행중':
           stats.active++
           break
-        case 'Completed':
+        case '완료':
           stats.completed++
           break
-        case 'Maintenance':
+        case '유지보수':
           stats.maintenance++
           break
-        case 'Archived':
+        case '보관':
           stats.archived++
           break
-        case 'In Progress':
+        case '개발중':
           stats.inProgress++
           break
       }
