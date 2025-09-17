@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { X, Plus, Minus, Save } from 'lucide-react'
+import { X, Plus, Minus, Save, Copy, Upload } from 'lucide-react'
 import { createProject } from '@/lib/database'
 import { Project, ProjectCategory, ProjectStatus, ProjectSize } from '@/types'
 
@@ -19,6 +19,7 @@ const sizes: ProjectSize[] = ['Small', 'Medium', 'Large', 'Enterprise']
 export default function AddProjectModal({ isOpen, onClose, onSuccess }: AddProjectModalProps) {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const [showSuccess, setShowSuccess] = useState('')
   
   // 폼 상태
   const [formData, setFormData] = useState({
@@ -130,6 +131,98 @@ export default function AddProjectModal({ isOpen, onClose, onSuccess }: AddProje
     }
   }
 
+  const handleCopyPrompt = async () => {
+    const promptText = `프로젝트 정보를 다음 JSON 형식으로 추출해주세요:
+
+{
+  "name": "프로젝트 이름",
+  "description": "간단한 설명 (한 줄)",
+  "longDescription": "상세 설명 (선택사항)",
+  "techStack": ["기술1", "기술2", "기술3"],
+  "startDate": "YYYY-MM-DD",
+  "endDate": "YYYY-MM-DD (완료된 경우)",
+  "version": "버전 (예: 1.0.0)",
+  "category": "Web|Mobile|Library|API|Tool|Game|Other",
+  "status": "진행중|개발중|완료|유지보수|보관",
+  "size": "Small|Medium|Large|Enterprise",
+  "githubUrl": "GitHub 저장소 URL",
+  "vercelUrl": "Vercel 배포 URL",
+  "npmUrl": "NPM 패키지 URL",
+  "demoUrl": "데모/라이브 사이트 URL",
+  "features": ["주요 기능1", "주요 기능2"],
+  "screenshots": ["스크린샷 URL1", "스크린샷 URL2"],
+  "highlights": ["하이라이트1", "하이라이트2"] (선택사항),
+  "challenges": ["도전과제1", "도전과제2"] (선택사항),
+  "learnings": ["배운점1", "배운점2"] (선택사항),
+  "stars": 0,
+  "downloads": 0,
+  "contributors": 1
+}
+
+프로젝트의 README.md, package.json, 소스코드를 분석하여 위 형식에 맞게 정보를 추출해주세요.
+값이 없는 필드는 빈 문자열이나 빈 배열로, 선택사항 필드는 null 또는 제외해도 됩니다.`
+
+    try {
+      await navigator.clipboard.writeText(promptText)
+      setShowSuccess('AI 프롬프트가 클립보드에 복사되었습니다!')
+      setTimeout(() => setShowSuccess(''), 3000)
+    } catch (err) {
+      setError('클립보드 복사에 실패했습니다.')
+    }
+  }
+
+  const handleJsonUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+
+    const reader = new FileReader()
+    reader.onload = (event) => {
+      try {
+        const jsonData = JSON.parse(event.target?.result as string)
+
+        // JSON 데이터로 폼 필드 채우기
+        setFormData(prev => ({
+          ...prev,
+          name: jsonData.name || '',
+          description: jsonData.description || '',
+          longDescription: jsonData.longDescription || '',
+          techStack: Array.isArray(jsonData.techStack) ? jsonData.techStack.filter(Boolean) : [''],
+          startDate: jsonData.startDate || '',
+          endDate: jsonData.endDate || '',
+          version: jsonData.version || '1.0.0',
+          category: jsonData.category || 'Web',
+          status: jsonData.status || 'In Progress',
+          size: jsonData.size || 'Medium',
+          githubUrl: jsonData.githubUrl || '',
+          vercelUrl: jsonData.vercelUrl || '',
+          npmUrl: jsonData.npmUrl || '',
+          demoUrl: jsonData.demoUrl || '',
+          features: Array.isArray(jsonData.features) ? jsonData.features.filter(Boolean) : [''],
+          screenshots: Array.isArray(jsonData.screenshots) ? jsonData.screenshots.filter(Boolean) : [''],
+          highlights: Array.isArray(jsonData.highlights) ? jsonData.highlights.filter(Boolean) : [''],
+          challenges: Array.isArray(jsonData.challenges) ? jsonData.challenges.filter(Boolean) : [''],
+          learnings: Array.isArray(jsonData.learnings) ? jsonData.learnings.filter(Boolean) : [''],
+          stars: jsonData.stars || 0,
+          downloads: jsonData.downloads || 0,
+          contributors: jsonData.contributors || 1,
+        }))
+
+        setShowSuccess('JSON 파일이 성공적으로 로드되었습니다!')
+        setTimeout(() => setShowSuccess(''), 3000)
+      } catch (err) {
+        setError('JSON 파일 형식이 올바르지 않습니다.')
+      }
+    }
+
+    reader.onerror = () => {
+      setError('파일을 읽는 중 오류가 발생했습니다.')
+    }
+
+    reader.readAsText(file)
+    // 파일 입력 초기화
+    e.target.value = ''
+  }
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -148,14 +241,39 @@ export default function AddProjectModal({ isOpen, onClose, onSuccess }: AddProje
             onClick={(e) => e.stopPropagation()}
           >
             {/* Header */}
-            <div className="sticky top-0 bg-background border-b border-border p-6 flex items-center justify-between">
-              <h2 className="text-2xl font-bold">새 프로젝트 추가</h2>
-              <button
-                onClick={onClose}
-                className="p-2 hover:bg-muted rounded-lg transition-colors"
-              >
-                <X className="w-5 h-5" />
-              </button>
+            <div className="sticky top-0 bg-background border-b border-border p-6">
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-2xl font-bold">새 프로젝트 추가</h2>
+                <button
+                  onClick={onClose}
+                  className="p-2 hover:bg-muted rounded-lg transition-colors"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              {/* AI Helper Buttons */}
+              <div className="flex gap-3">
+                <button
+                  type="button"
+                  onClick={handleCopyPrompt}
+                  className="flex items-center gap-2 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-colors text-sm"
+                >
+                  <Copy className="w-4 h-4" />
+                  AI 프롬프트 복사
+                </button>
+
+                <label className="flex items-center gap-2 px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg transition-colors text-sm cursor-pointer">
+                  <Upload className="w-4 h-4" />
+                  JSON 파일 업로드
+                  <input
+                    type="file"
+                    accept=".json"
+                    onChange={handleJsonUpload}
+                    className="hidden"
+                  />
+                </label>
+              </div>
             </div>
 
             {/* Form */}
@@ -167,6 +285,16 @@ export default function AddProjectModal({ isOpen, onClose, onSuccess }: AddProje
                   className="p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg"
                 >
                   <p className="text-red-600 dark:text-red-400">{error}</p>
+                </motion.div>
+              )}
+
+              {showSuccess && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg"
+                >
+                  <p className="text-green-600 dark:text-green-400">{showSuccess}</p>
                 </motion.div>
               )}
 
