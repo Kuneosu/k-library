@@ -1,0 +1,70 @@
+{
+  "id": "80834673-0852-473c-9eed-a660b7a9c71b",
+  "name": "Rubik's Cube 3D Web Application",
+  "description": "웹 브라우저에서 실행되는 고성능 3D 루빅스 큐브 시뮬레이터",
+  "long_description": "Three.js와 React를 사용하여 실제 큐브와 동일한 조작감을 제공하며, 스피드큐빙 타이머와 랭킹 시스템을 포함한 종합 플랫폼입니다.",
+  "tech_stack": [
+    "Three.js",
+    "React Three Fiber",
+    "GSAP",
+    "React",
+    "TypeScript",
+    "Supabase",
+    "Vite",
+    "Vibe Coding"
+  ],
+  "start_date": "2025-09-11",
+  "end_date": "2025-09-16",
+  "version": "1.0.0",
+  "category": "Web",
+  "status": "완료",
+  "size": "Medium",
+  "github_url": "https://github.com/Kuneosu/rubiks-cube",
+  "vercel_url": "https://rubiks-cube-sandy.vercel.app/",
+  "npm_url": null,
+  "demo_url": null,
+  "features": [
+    "3D 루빅스 큐브 시뮬레이션",
+    "스피드큐빙 타이머 (ms 정밀도)",
+    "16-카메라 그리드 네비게이션",
+    "QWEASD 직관적인 키보드 조작",
+    "온라인 랭킹 시스템",
+    "25수 랜덤 섞기",
+    "실시간 히스토리 추적",
+    "물리 기반 렌더링 (PBR)",
+    "영어/한국어 다국어 지원"
+  ],
+  "screenshots": [
+    "https://github.com/Kuneosu/image-repo/blob/main/k-library/rubiks-cube/01.png?raw=true",
+    "https://github.com/Kuneosu/image-repo/blob/main/k-library/rubiks-cube/02.png?raw=true",
+    "https://github.com/Kuneosu/image-repo/blob/main/k-library/rubiks-cube/03.png?raw=true"
+  ],
+  "highlights": [
+    "60+ FPS 실시간 3D 렌더링 구현",
+    "부드러운 애니메이션 최적화",
+    "카메라 상대적 회전 시스템으로 직관적 조작",
+    "Supabase 기반 실시간 온라인 랭킹 시스템",
+    "27개 큐블렛 인스턴싱으로 메모리 최적화",
+    "물리 기반 재질과 실시간 그림자 구현",
+    "i18n 기반 영어/한국어 다국어 지원으로 글로벌 사용자 경험 제공"
+  ],
+  "challenges": [
+    "Three.js에서 카메라 상대적 큐브 회전 로직 구현",
+    "React Three Fiber와 GSAP 애니메이션 동기화",
+    "큐브 해결 상태 실시간 검증 알고리즘 최적화",
+    "27개 큐블렛의 복잡한 상태 관리",
+    "TypeScript에서 Three.js 객체 타입 정의"
+  ],
+  "learnings": [
+    "React Three Fiber를 활용한 선언적 3D 프로그래밍",
+    "GSAP과 Three.js 통합으로 부드러운 애니메이션 구현",
+    "복잡한 3D 수학 연산과 쿼터니언 회전 처리",
+    "WebGL 최적화 기법과 인스턴싱 활용법",
+    "사용자 경험 중심의 인터랙션 디자인"
+  ],
+  "stars": 0,
+  "downloads": 0,
+  "contributors": 1,
+  "created_at": "2025-09-16 04:02:25.040727+00",
+  "updated_at\r": "2025-09-16 04:12:09.226861+00"
+}

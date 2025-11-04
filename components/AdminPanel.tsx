@@ -11,6 +11,9 @@ export default function AdminPanel() {
   const [showLoginModal, setShowLoginModal] = useState(false)
   const [showDropdown, setShowDropdown] = useState(false)
 
+  // 개발 환경에서만 표시
+  const isDevelopment = process.env.NODE_ENV === 'development'
+
   const handleSignOut = async () => {
     try {
       await signOut()
@@ -18,6 +21,11 @@ export default function AdminPanel() {
     } catch (error) {
       console.error('로그아웃 실패:', error)
     }
+  }
+
+  // 프로덕션 환경에서는 완전히 숨김
+  if (!isDevelopment) {
+    return null
   }
 
   if (!user) {

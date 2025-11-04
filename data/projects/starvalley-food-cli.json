@@ -1,0 +1,64 @@
+{
+  "id": "fc871c5b-ee68-4049-8ff6-b934ecb9e27f",
+  "name": "Starvalley Food CLI",
+  "description": "Star Valley 구내식당 메뉴 조회 CLI 도구입니다. Claude CLI 기반 완전 자동화 아키텍처로 전환하여 더욱 효율적이고 경제적인 솔루션을 제공합니다.",
+  "long_description": "Star Valley Food CLI는 Star Valley 구내식당의 일일 메뉴를 터미널에서 손쉽게 조회할 수 있는 Node.js 기반 CLI 도구입니다. Claude AI를 활용한 완전 자동화 시스템으로 카카오 채널의 메뉴 이미지를 분석하여 텍스트로 변환하고, npm 패키지로 전 세계 어디서든 실시간 조회가 가능합니다.",
+  "tech_stack": [
+    "Vibe Coding",
+    "Claude Code",
+    "Node.js",
+    "JavaScript",
+    "GitHub Actions",
+    "Google Gemini API"
+  ],
+  "start_date": "2025-09-01",
+  "end_date": "2025-09-03",
+  "version": "3.4.2",
+  "category": "Library",
+  "status": "완료",
+  "size": "Small",
+  "github_url": "https://github.com/Kuneosu/Starvalley_food?tab=readme-ov-file",
+  "vercel_url": null,
+  "npm_url": "https://www.npmjs.com/package/starvalley-food",
+  "demo_url": null,
+  "features": [
+    "GitHub Actions 자동화: 정해진 시간에 자동으로 메뉴 업데이트 및 배포",
+    "완전 자동화 파이프라인: 웹 스크래핑 → Gemini API 분석 → GitHub 배포까지 원 스크립트 실행",
+    "실시간 메뉴 조회: st-food today 한 줄로 구내식당 메뉴를 1초 내 터미널에서 확인",
+    "글로벌 npm 패키지: npm install -g starvalley-food로 전 세계 어디서든 설치 및 사용 가능",
+    "다양한 출력 형태: 일반 텍스트, JSON, 상세/간단 모드 등 유연한 출력 옵션"
+  ],
+  "screenshots": [
+    "https://github.com/Kuneosu/image-repo/blob/main/k-library/st-food.png?raw=true"
+  ],
+  "highlights": [
+    "Gemini 2.0 Flash API 한글 OCR: 95%+ 정확도로 카카오 채널 메뉴 이미지를 텍스트로 변환하며 비용 효율적",
+    "GitHub Actions 스케줄링: 매일 정해진 시간에 자동으로 메뉴를 업데이트하여 항상 최신 정보 제공",
+    "초간소화 시스템: 스크립트 하나로 모든 과정이 실행되어 아주 쉽게 메뉴 데이터 업데이트",
+    "GitHub 인프라 활용: 안정적인 데이터 저장소 및 CDN을 통한 빠른 전 세계 접근",
+    "CLI 도구의 완성도: 에러 핸들링, 로딩 스피너, 색상 출력 등 사용자 경험 최적화"
+  ],
+  "challenges": [
+    "웹 스크래핑 불안정성: 카카오 채널 구조 변경 시 스크래핑 로직 실패 위험성 해결",
+    "AI 분석 신뢰성: 이미지 품질이나 메뉴 형식 변화에 따른 OCR 정확도 유지",
+    "\"에러 복구 메커니즘: 네트워크 오류",
+    "API 실패",
+    "권한 문제 등 다양한 실패 시나리오 대응\"",
+    "\"크로스 플랫폼 호환성: macOS",
+    "Windows",
+    "Linux 환경에서의 Cron 작업 및 권한 설정 차이\""
+  ],
+  "learnings": [
+    "GitHub Actions CI/CD: 스케줄 기반 자동화 워크플로우 구축과 비용 효율적인 운영 방법",
+    "AI 모델 비교 및 전환: GPT-4o-mini에서 Gemini 2.0 Flash로 전환하여 성능과 비용 효율성 개선",
+    "자동화의 가치: 사람이 개입할 포인트를 최소화 시켜 안정성과 효율성을 향상",
+    "npm 생태계 활용: 글로벌 패키지 배포를 통해 로컬 도구를 전 세계 사용자에게 제공하는 방법",
+    "GitHub을 DB처럼 활용: 버전 관리 시스템을 실시간 데이터 저장소로 활용하는 창의적 접근",
+    "사용자 중심 CLI 설계: 직관적인 명령어 구조와 풍부한 피드백으로 개발자 경험(DX) 최적화"
+  ],
+  "stars": 0,
+  "downloads": 639,
+  "contributors": 1,
+  "created_at": "2025-09-04 09:16:56.534236+00",
+  "updated_at\r": "2025-09-04 23:53:47.371797+00"
+}

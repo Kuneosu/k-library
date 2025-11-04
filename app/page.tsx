@@ -2,13 +2,12 @@
 
 import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import DeveloperProfile from "@/components/DeveloperProfile";
-import ProjectGrid from "@/components/ProjectGrid";
+import InfoTab from "@/components/InfoTab";
+import ProjectTab from "@/components/ProjectTab";
 import ThemeToggle from "@/components/ThemeToggle";
 import AdminPanel from "@/components/AdminPanel";
 import AddProjectButton from "@/components/AddProjectButton";
 import HeaderSocialLinks from "@/components/HeaderSocialLinks";
-import { developerProfile } from "@/data/mockData";
 import {
   getAllProjects,
   getProjectStats,
@@ -17,6 +16,7 @@ import {
 import { Project, DeveloperProfile as DeveloperProfileType } from "@/types";
 
 export default function HomePage() {
+  const [activeTab, setActiveTab] = useState<"info" | "project">("info");
   const [projects, setProjects] = useState<Project[]>([]);
   const [projectStats, setProjectStats] = useState({
     total: 0,
@@ -76,9 +76,10 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Header with Theme Toggle */}
+      {/* Header with Logo, Tabs, and Controls */}
       <header className="sticky top-0 z-40 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container mx-auto px-4 h-14 flex items-center justify-between">
+          {/* Left: Logo */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -90,6 +91,44 @@ export default function HomePage() {
             <span className="font-semibold">K Library</span>
           </motion.div>
 
+          {/* Center: Tab Navigation */}
+          <motion.nav
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="flex items-center space-x-1"
+          >
+            {[
+              { id: "info", label: "Info" },
+              { id: "project", label: "Project" },
+            ].map((tab) => (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id as "info" | "project")}
+                className={`relative px-4 py-2 rounded-lg transition-all duration-200 ${
+                  activeTab === tab.id
+                    ? "text-primary font-medium"
+                    : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                }`}
+              >
+                <span className="text-sm">{tab.label}</span>
+
+                {activeTab === tab.id && (
+                  <motion.div
+                    layoutId="activeTab"
+                    className="absolute inset-0 bg-primary/10 border border-primary/20 rounded-lg"
+                    initial={false}
+                    transition={{
+                      type: "spring",
+                      stiffness: 500,
+                      damping: 30,
+                    }}
+                  />
+                )}
+              </button>
+            ))}
+          </motion.nav>
+
+          {/* Right: Controls */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -103,82 +142,27 @@ export default function HomePage() {
       </header>
 
       <main className="container mx-auto px-4 py-8">
-        {/* Developer Profile Section */}
-        <section ref={profileRef} className="mb-12">
-          {loading ? (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="text-center py-12"
-            >
-              <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
-              <p className="mt-4 text-muted-foreground">
-                프로필을 불러오는 중...
-              </p>
-            </motion.div>
-          ) : profile ? (
-            <DeveloperProfile 
-              profile={profile} 
-              projectStats={projectStats} 
-              onProfileUpdated={async () => {
-                const updatedProfile = await getDeveloperProfileWithSkills()
-                setProfile(updatedProfile)
-              }} 
-            />
-          ) : (
-            <DeveloperProfile
-              profile={developerProfile}
+        {/* Tab Content */}
+        <div ref={profileRef}>
+          {activeTab === "info" ? (
+            <InfoTab
+              profile={profile}
               projectStats={projectStats}
+              loading={loading}
+              onProfileUpdated={async () => {
+                const updatedProfile = await getDeveloperProfileWithSkills();
+                setProfile(updatedProfile);
+              }}
             />
-          )}
-        </section>
-
-        {/* Projects Section */}
-        <section>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="mb-8"
-          >
-            <h2 className="text-3xl font-bold mb-2">프로젝트</h2>
-            <p className="text-muted-foreground">
-              다양한 기술과 아이디어로 구현한 사이드 프로젝트들을 살펴보세요.
-            </p>
-          </motion.div>
-
-          {error ? (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="text-center py-12"
-            >
-              <p className="text-red-500 mb-4">{error}</p>
-              <button
-                onClick={() => window.location.reload()}
-                className="px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
-              >
-                다시 시도
-              </button>
-            </motion.div>
-          ) : loading ? (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="text-center py-12"
-            >
-              <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
-              <p className="mt-4 text-muted-foreground">
-                프로젝트를 불러오는 중...
-              </p>
-            </motion.div>
           ) : (
-            <ProjectGrid
+            <ProjectTab
               projects={projects}
+              loading={loading}
+              error={error}
               onProjectUpdated={() => window.location.reload()}
             />
           )}
-        </section>
+        </div>
       </main>
 
       {/* Footer */}

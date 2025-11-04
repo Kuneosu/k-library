@@ -10,8 +10,11 @@ export default function AddProjectButton() {
   const { isAdmin } = useAuth()
   const [showModal, setShowModal] = useState(false)
 
-  // 관리자가 아니면 렌더링하지 않음
-  if (!isAdmin) {
+  // 개발 환경에서만 표시
+  const isDevelopment = process.env.NODE_ENV === 'development'
+
+  // 프로덕션 환경이거나 관리자가 아니면 렌더링하지 않음
+  if (!isDevelopment || !isAdmin) {
     return null
   }
 

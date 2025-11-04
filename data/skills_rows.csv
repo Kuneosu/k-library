@@ -1,0 +1,6 @@
+id,profile_id,category,items,display_order,created_at,updated_at
+3a6ec545-5d2d-497e-b39b-98ed7e2d414e,140673f1-7e62-4d87-a58e-9a5a9fb5d8d4,Tools,"[""Git"",""VS Code"",""Figma"",""Postman"",""Claude Code"",""Perplexity"",""Cursor"",""Ollama""]",4,2025-09-04 23:55:00.239458+00,2025-09-04 23:55:00.239458+00
+4ebaa81c-34b6-4029-aa1e-e8df32a64759,140673f1-7e62-4d87-a58e-9a5a9fb5d8d4,Frontend,"[""React"",""Next.js"",""TypeScript"",""JavaScript"",""Tailwind CSS"",""Flutter"",""Dart""]",1,2025-09-04 23:55:00.239458+00,2025-09-04 23:55:00.239458+00
+8390418f-59bf-40e7-9b78-fdb155ae5acb,140673f1-7e62-4d87-a58e-9a5a9fb5d8d4,DevOps,"[""Docker"",""Vercel"",""GitHub Actions"",""Nginx""]",3,2025-09-04 23:55:00.239458+00,2025-09-04 23:55:00.239458+00
+8a882f29-43ce-4477-8d8c-0e52735e894f,140673f1-7e62-4d87-a58e-9a5a9fb5d8d4,Backend,"[""Node.js"",""Python"",""FastAPI""]",2,2025-09-04 23:55:00.239458+00,2025-09-04 23:55:00.239458+00
+bcbe54fd-dec8-4038-92f5-8b12f63d4033,140673f1-7e62-4d87-a58e-9a5a9fb5d8d4,AI,"[""Claude"",""Chat GPT"",""Gemini""]",5,2025-09-04 23:55:00.239458+00,2025-09-04 23:55:00.239458+00
