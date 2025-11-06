@@ -1,0 +1,53 @@
+{
+  "id": "00000000-0000-0000-0000-000000000000",
+  "name": "프로젝트 이름",
+  "description": "프로젝트에 대한 간단한 한 줄 설명",
+  "long_description": "프로젝트에 대한 상세한 설명입니다. 프로젝트의 목적, 주요 기능, 사용 사례 등을 자세히 작성합니다. 여러 줄로 작성할 수 있으며, 프로젝트의 핵심 가치와 특징을 잘 드러내야 합니다.",
+  "tech_stack": [
+    "React",
+    "TypeScript",
+    "Node.js",
+    "Express",
+    "PostgreSQL"
+  ],
+  "start_date": "2025-01-01",
+  "end_date": "2025-12-31",
+  "version": "1.0.0",
+  "category": "Web",
+  "status": "완료",
+  "size": "Medium",
+  "github_url": "https://github.com/username/project-name",
+  "vercel_url": "https://project-name.vercel.app",
+  "npm_url": "https://www.npmjs.com/package/project-name",
+  "demo_url": "https://demo.project-name.com",
+  "features": [
+    "주요 기능 1 - 상세 설명",
+    "주요 기능 2 - 상세 설명",
+    "주요 기능 3 - 상세 설명",
+    "주요 기능 4 - 상세 설명"
+  ],
+  "screenshots": [
+    "https://github.com/username/image-repo/blob/main/project-name/screenshot1.png?raw=true",
+    "https://github.com/username/image-repo/blob/main/project-name/screenshot2.png?raw=true"
+  ],
+  "highlights": [
+    "프로젝트에서 가장 자랑할 만한 성과나 특징 1",
+    "프로젝트에서 가장 자랑할 만한 성과나 특징 2",
+    "프로젝트에서 가장 자랑할 만한 성과나 특징 3"
+  ],
+  "challenges": [
+    "프로젝트 진행 중 겪었던 기술적 어려움이나 문제 1",
+    "프로젝트 진행 중 겪었던 기술적 어려움이나 문제 2",
+    "프로젝트 진행 중 겪었던 기술적 어려움이나 문제 3"
+  ],
+  "learnings": [
+    "프로젝트를 통해 배운 기술이나 경험 1",
+    "프로젝트를 통해 배운 기술이나 경험 2",
+    "프로젝트를 통해 배운 기술이나 경험 3"
+  ],
+  "stars": 0,
+  "downloads": 0,
+  "contributors": 1,
+  "created_at": "2025-01-01 00:00:00.000000+00",
+  "updated_at": "2025-01-01 00:00:00.000000+00"
+}

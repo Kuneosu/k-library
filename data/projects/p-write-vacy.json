@@ -1,8 +1,9 @@
 {
+  "id": "7f8e9a1b-2c3d-4e5f-6a7b-8c9d0e1f2a3b",
   "name": "P-write-vacy",
   "description": "프라이버시를 보호하는 텍스트 에디터 - 옆에서 보는 사람으로부터 글을 보호합니다",
-  "longDescription": "커서 주변만 선명하게 표시하고 나머지는 블러 처리하여 어깨 너머 훔쳐보기(shoulder surfing)로부터 작성 중인 글을 보호하는 프라이버시 중심 텍스트 에디터. Electron 데스크톱 앱으로 제공되며 파일 관리, 마크다운 지원, 커스터마이징 가능한 포커스 영역 등의 기능을 제공합니다.",
-  "techStack": [
+  "long_description": "커서 주변만 선명하게 표시하고 나머지는 블러 처리하여 어깨 너머 훔쳐보기(shoulder surfing)로부터 작성 중인 글을 보호하는 프라이버시 중심 텍스트 에디터입니다. Electron 데스크톱 앱으로 제공되며 파일 관리, 마크다운 지원, 커스터마이징 가능한 포커스 영역 등의 기능을 제공합니다.",
+  "tech_stack": [
     "React 19",
     "TypeScript",
     "Electron",
@@ -12,16 +13,16 @@
     "remark-gfm",
     "electron-builder"
   ],
-  "startDate": "2025-11-05",
-  "endDate": "",
+  "start_date": "2025-11-05",
+  "end_date": null,
   "version": "0.1.0",
   "category": "Tool",
   "status": "개발중",
   "size": "Medium",
-  "githubUrl": "https://github.com/Kuneosu/P-write-vacy",
-  "vercelUrl": "",
-  "npmUrl": "",
-  "demoUrl": "",
+  "github_url": "https://github.com/Kuneosu/P-write-vacy",
+  "vercel_url": null,
+  "npm_url": null,
+  "demo_url": null,
   "features": [
     "중심시야 최적화 - 커서 주변만 선명하게 표시하고 나머지는 블러 처리",
     "실시간 포커스 추적 - 텍스트 입력 시 커서를 자동으로 따라가는 포커스",
@@ -53,5 +54,7 @@
   ],
   "stars": 0,
   "downloads": 0,
-  "contributors": 1
+  "contributors": 1,
+  "created_at": "2025-11-05 00:00:00.000000+00",
+  "updated_at": "2025-11-05 00:00:00.000000+00"
 }
