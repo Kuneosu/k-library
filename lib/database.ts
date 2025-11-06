@@ -1,20 +1,7 @@
 import { Project, DeveloperProfile as DeveloperProfileType } from '@/types'
 import profileData from '@/data/profile.json'
 import skillsData from '@/data/skills.json'
-
-// 개별 프로젝트 파일 import
-import rubiksCube from '@/data/projects/rubiks-cube-3d-web-application.json'
-import bracketHelper from '@/data/projects/bracket-helper.json'
-import kLibrary from '@/data/projects/k-library-developer-projects-showcasee.json'
-import starvalleyFood from '@/data/projects/starvalley-food-cli.json'
-
-// 프로젝트 배열로 합치기
-const projectsData = [
-  rubiksCube,
-  bracketHelper,
-  kLibrary,
-  starvalleyFood
-]
+import projectsData from '@/data/projects/index'
 
 // JSON 데이터 타입
 type ProjectRow = typeof projectsData[0]

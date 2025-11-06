@@ -1,0 +1,339 @@
+// 이 파일은 scripts/generate-projects-index.js에 의해 자동 생성됩니다.
+// 수동으로 편집하지 마세요.
+
+// 프로젝트 배열로 export
+export const projects = [
+  {
+    "id": "ae54c5db-af8e-4b33-b4d7-8fef8c1f7025",
+    "name": "대진 도우미",
+    "description": "간편한 대진표 생성 및 경기 관리 앱",
+    "long_description": "대진 도우미는 대회나 친선 경기 준비를 간편하게 도와주는 대진표 생성 앱입니다.\n복잡한 설정 없이, 종목과 방식만 선택하면 자동으로 대진표가 만들어지고, 경기 결과 입력만으로 실시간 순위가 집계됩니다.\n선수 목록은 그룹(폴더) 단위로 저장할 수 있어, 다음 대회 준비도 훨씬 수월해집니다.\n생성된 대진표와 순위표는 이미지로 캡처하여 친구나 팀원과 쉽게 공유할 수 있습니다.\n서버를 사용하지 않고, 기기 내 데이터베이스로만 작동하여 오프라인에서도 완벽하게 이용할 수 있어요.",
+    "tech_stack": [
+      "Dart",
+      "Flutter",
+      "Get It",
+      "GoRouter",
+      "Drift (SQLite)",
+      "Clean Architecture",
+      "MVVM",
+      "Cursor",
+      "Android",
+      "iOS",
+      "Figma",
+      "Confluence",
+      "Jira"
+    ],
+    "start_date": "2025-04-14",
+    "end_date": "2025-05-07",
+    "version": "1.2518.8",
+    "category": "Mobile",
+    "status": "완료",
+    "size": "Large",
+    "github_url": "https://github.com/Kuneosu/bracket_helper",
+    "vercel_url": null,
+    "npm_url": null,
+    "demo_url": "https://play.google.com/store/apps/details?id=com.kuneosu.bracket_helper",
+    "features": [
+      "대진표 생성 : 3‑단계 마법사로 대회 정보·선수·대진표 설정",
+      "\"선수 관리 : 선수 목록 저장",
+      "폴더별 그룹 관리",
+      "빠른 불러오기\"",
+      "\"대진표 편집 : 자동 생성·드래그&드롭 수정",
+      "랜덤 재생성\"",
+      "\"경기 진행 : 점수 입력",
+      "실시간 순위 계산",
+      "다중 정렬\"",
+      "공유 : 대진표·순위표 이미지 캡처 후 시스템 공유",
+      "완전 오프라인 : Drift(SQLite) 로컬 DB — 서버 불필요"
+    ],
+    "screenshots": [
+      "https://github.com/Kuneosu/image-repo/blob/main/k-library/bracket-helper/1.png?raw=true",
+      "https://github.com/Kuneosu/image-repo/blob/main/k-library/bracket-helper/2.png?raw=true",
+      "https://github.com/Kuneosu/image-repo/blob/main/k-library/bracket-helper/3.png?raw=true",
+      "https://github.com/Kuneosu/image-repo/blob/main/k-library/bracket-helper/4.png?raw=true",
+      "https://github.com/Kuneosu/image-repo/blob/main/k-library/bracket-helper/5.png?raw=true",
+      "https://github.com/Kuneosu/image-repo/blob/main/k-library/bracket-helper/6.png?raw=true",
+      "https://github.com/Kuneosu/image-repo/blob/main/k-library/bracket-helper/7.png?raw=true"
+    ],
+    "highlights": null,
+    "challenges": null,
+    "learnings": null,
+    "stars": 0,
+    "downloads": 382,
+    "contributors": 1,
+    "created_at": "2025-09-05 00:34:15.8831+00",
+    "updated_at\r": "2025-09-05 01:10:57.048305+00"
+  },
+  {
+    "id": "bb3fee80-ae47-49b9-a19b-b84baa92322b",
+    "name": "K Library - Developer Projects Showcasee",
+    "description": "개발 프로젝트를 체계적으로 관리하고 전시하는 포트폴리오 라이브러리",
+    "long_description": "사이드 프로젝트와 토이 프로젝트들을 체계적으로 관리하고 전시하는 개인 프로젝트 라이브러리입니다. 다중 뷰 시스템, 고급 이미지 갤러리, 관리자 시스템 등 현대적인 웹 애플리케이션의 모든 기능을 갖춘 포트폴리오 플랫폼입니다.",
+    "tech_stack": [
+      "Vibe Coding",
+      "Claude Code",
+      "Next.js",
+      "TypeScript",
+      "Tailwind CSS",
+      "Framer Motion",
+      "React Portal",
+      "GitHub JSON Storage",
+      "OpenAI API"
+    ],
+    "start_date": "2025-09-04",
+    "end_date": "2025-09-04",
+    "version": "1.0.0",
+    "category": "Web",
+    "status": "진행중",
+    "size": "Medium",
+    "github_url": "https://github.com/Kuneosu/k-library",
+    "vercel_url": "https://k-library.vercel.app/",
+    "npm_url": null,
+    "demo_url": "https://k-library.vercel.app/",
+    "features": [
+      "다중 뷰 프로젝트 관리 (리스트/갤러리/테이블)",
+      "React Portal 기반 모달 시스템",
+      "드래그 스크롤 이미지 갤러리",
+      "풀스크린 이미지 뷰어",
+      "GitHub JSON 기반 데이터 저장 및 버전 관리",
+      "개발 환경 전용 관리자 시스템 (localStorage 인증)",
+      "AI 기반 프로젝트 생성 기능 (OpenAI API)",
+      "실시간 검색 및 필터링",
+      "라이트/다크 테마 시스템",
+      "완전 반응형 디자인",
+      "TypeScript 타입 안전성"
+    ],
+    "screenshots": [
+      "https://github.com/Kuneosu/image-repo/blob/main/k-library/logo.png?raw=true"
+    ],
+    "highlights": [
+      "Supabase에서 GitHub JSON으로 성공적인 마이그레이션 - 데이터베이스 없이 정적 사이트 구현",
+      "Git 기반 데이터 관리 워크플로우: JSON 편집 → Git Commit → Vercel 자동 배포",
+      "개발/프로덕션 환경 분리: 개발 환경에서만 AI 프로젝트 생성 및 관리 기능 제공",
+      "React Portal을 활용한 모달 z-index 문제 해결",
+      "Framer Motion을 이용한 자연스러운 드래그 스크롤 구현",
+      "Next.js 15 App Router와 TypeScript 완벽 통합",
+      "3가지 뷰 모드로 사용자 경험 최적화"
+    ],
+    "challenges": [
+      "Supabase에서 GitHub JSON으로 전환: 데이터베이스 의존성 완전 제거 및 타입 안전성 유지",
+      "CSV to JSON 변환: PostgreSQL 배열 형식, 이스케이프 문자, 멀티라인 필드 파싱 문제 해결",
+      "개별 프로젝트 파일 관리: projects/ 폴더에 각 프로젝트를 독립 JSON 파일로 분리 관리",
+      "React Portal의 document.body 렌더링으로 인한 z-index 충돌",
+      "Framer Motion PanInfo를 활용한 터치/마우스 이벤트 통합",
+      "Next.js 빌드 시 ESLint/TypeScript 설정 최적화",
+      "이미지 비율 문제로 인한 다중 뷰 시스템 필요성"
+    ],
+    "learnings": [
+      "데이터베이스 없는 정적 사이트 아키텍처: GitHub을 데이터 저장소로 활용하는 혁신적 접근",
+      "CSV 파싱의 복잡성: PostgreSQL/JSON 배열 형식, 따옴표 이스케이핑, 멀티라인 처리 완전 이해",
+      "모듈형 데이터 구조: 개별 JSON 파일 관리로 Git diff 최적화 및 유지보수성 향상",
+      "환경 기반 기능 분리: process.env.NODE_ENV 활용한 개발/프로덕션 차별화 전략",
+      "React Portal 활용법과 모달 렌더링 최적화",
+      "Framer Motion의 고급 제스처 및 애니메이션 기법",
+      "Next.js 15의 새로운 기능과 성능 최적화",
+      "사용자 경험 개선을 위한 인터페이스 설계"
+    ],
+    "stars": 0,
+    "downloads": 0,
+    "contributors": 1,
+    "created_at": "2025-09-04 04:41:50.738476+00",
+    "updated_at\r": "2025-09-04 23:53:17.640913+00"
+  },
+  {
+    "id": "7f8e9a1b-2c3d-4e5f-6a7b-8c9d0e1f2a3b",
+    "name": "P-write-vacy",
+    "description": "프라이버시를 보호하는 텍스트 에디터 - 옆에서 보는 사람으로부터 글을 보호합니다",
+    "long_description": "커서 주변만 선명하게 표시하고 나머지는 블러 처리하여 어깨 너머 훔쳐보기(shoulder surfing)로부터 작성 중인 글을 보호하는 프라이버시 중심 텍스트 에디터입니다. Electron 데스크톱 앱으로 제공되며 파일 관리, 마크다운 지원, 커스터마이징 가능한 포커스 영역 등의 기능을 제공합니다.",
+    "tech_stack": [
+      "React 19",
+      "TypeScript",
+      "Electron",
+      "Vite",
+      "TailwindCSS",
+      "React Markdown",
+      "remark-gfm",
+      "electron-builder"
+    ],
+    "start_date": "2025-11-05",
+    "end_date": null,
+    "version": "0.1.0",
+    "category": "Tool",
+    "status": "개발중",
+    "size": "Medium",
+    "github_url": "https://github.com/Kuneosu/P-write-vacy",
+    "vercel_url": null,
+    "npm_url": null,
+    "demo_url": null,
+    "features": [
+      "중심시야 최적화 - 커서 주변만 선명하게 표시하고 나머지는 블러 처리",
+      "실시간 포커스 추적 - 텍스트 입력 시 커서를 자동으로 따라가는 포커스",
+      "파일 탐색기 - 폴더/파일 트리 구조 탐색 및 관리",
+      "자동 저장 - 파일 수정 시 1초 후 자동 저장",
+      "마크다운 뷰어 - GitHub Flavored Markdown 지원",
+      "키보드 단축키 - 프라이버시 모드 토글, 포커스 크기 조절 등",
+      "커스터마이징 - 포커스 영역 크기/모양, 블러 색상/강도, 배경/텍스트 색상 설정",
+      "크로스 플랫폼 - macOS, Windows, Linux 데스크톱 앱 지원"
+    ],
+    "screenshots": [],
+    "highlights": [
+      "어깨 너머 훔쳐보기(shoulder surfing) 방지를 위한 독특한 UX",
+      "순수 브라우저 API(Selection API, ContentEditable) 활용",
+      "Electron으로 네이티브 데스크톱 앱 경험 제공",
+      "재귀적 폴더 탐색 및 드래그 앤 드롭 파일 이동 지원"
+    ],
+    "challenges": [
+      "contenteditable 요소에서 커서 위치 실시간 추적",
+      "프라이버시 모드 전환 시 자연스러운 블러 애니메이션 구현",
+      "파일 탐색기 키보드 단축키와 에디터 입력 이벤트 충돌 해결",
+      "Electron 앱 빌드 및 macOS 코드 서명 설정"
+    ],
+    "learnings": [
+      "React에서 contenteditable 요소 제어 및 Selection API 활용",
+      "Electron 데스크톱 앱 개발 및 IPC 통신",
+      "TypeScript strict 모드에서의 타입 안전성 확보",
+      "electron-builder를 통한 크로스 플랫폼 빌드 자동화"
+    ],
+    "stars": 0,
+    "downloads": 0,
+    "contributors": 1,
+    "created_at": "2025-11-05 00:00:00.000000+00",
+    "updated_at": "2025-11-05 00:00:00.000000+00"
+  },
+  {
+    "id": "80834673-0852-473c-9eed-a660b7a9c71b",
+    "name": "Rubik's Cube 3D Web Application",
+    "description": "웹 브라우저에서 실행되는 고성능 3D 루빅스 큐브 시뮬레이터",
+    "long_description": "Three.js와 React를 사용하여 실제 큐브와 동일한 조작감을 제공하며, 스피드큐빙 타이머와 랭킹 시스템을 포함한 종합 플랫폼입니다.",
+    "tech_stack": [
+      "Three.js",
+      "React Three Fiber",
+      "GSAP",
+      "React",
+      "TypeScript",
+      "Supabase",
+      "Vite",
+      "Vibe Coding"
+    ],
+    "start_date": "2025-09-11",
+    "end_date": "2025-09-16",
+    "version": "1.0.0",
+    "category": "Web",
+    "status": "완료",
+    "size": "Medium",
+    "github_url": "https://github.com/Kuneosu/rubiks-cube",
+    "vercel_url": "https://rubiks-cube-sandy.vercel.app/",
+    "npm_url": null,
+    "demo_url": null,
+    "features": [
+      "3D 루빅스 큐브 시뮬레이션",
+      "스피드큐빙 타이머 (ms 정밀도)",
+      "16-카메라 그리드 네비게이션",
+      "QWEASD 직관적인 키보드 조작",
+      "온라인 랭킹 시스템",
+      "25수 랜덤 섞기",
+      "실시간 히스토리 추적",
+      "물리 기반 렌더링 (PBR)",
+      "영어/한국어 다국어 지원"
+    ],
+    "screenshots": [
+      "https://github.com/Kuneosu/image-repo/blob/main/k-library/rubiks-cube/01.png?raw=true",
+      "https://github.com/Kuneosu/image-repo/blob/main/k-library/rubiks-cube/02.png?raw=true",
+      "https://github.com/Kuneosu/image-repo/blob/main/k-library/rubiks-cube/03.png?raw=true"
+    ],
+    "highlights": [
+      "60+ FPS 실시간 3D 렌더링 구현",
+      "부드러운 애니메이션 최적화",
+      "카메라 상대적 회전 시스템으로 직관적 조작",
+      "Supabase 기반 실시간 온라인 랭킹 시스템",
+      "27개 큐블렛 인스턴싱으로 메모리 최적화",
+      "물리 기반 재질과 실시간 그림자 구현",
+      "i18n 기반 영어/한국어 다국어 지원으로 글로벌 사용자 경험 제공"
+    ],
+    "challenges": [
+      "Three.js에서 카메라 상대적 큐브 회전 로직 구현",
+      "React Three Fiber와 GSAP 애니메이션 동기화",
+      "큐브 해결 상태 실시간 검증 알고리즘 최적화",
+      "27개 큐블렛의 복잡한 상태 관리",
+      "TypeScript에서 Three.js 객체 타입 정의"
+    ],
+    "learnings": [
+      "React Three Fiber를 활용한 선언적 3D 프로그래밍",
+      "GSAP과 Three.js 통합으로 부드러운 애니메이션 구현",
+      "복잡한 3D 수학 연산과 쿼터니언 회전 처리",
+      "WebGL 최적화 기법과 인스턴싱 활용법",
+      "사용자 경험 중심의 인터랙션 디자인"
+    ],
+    "stars": 0,
+    "downloads": 0,
+    "contributors": 1,
+    "created_at": "2025-09-16 04:02:25.040727+00",
+    "updated_at\r": "2025-09-16 04:12:09.226861+00"
+  },
+  {
+    "id": "fc871c5b-ee68-4049-8ff6-b934ecb9e27f",
+    "name": "Starvalley Food CLI",
+    "description": "Star Valley 구내식당 메뉴 조회 CLI 도구입니다. Claude CLI 기반 완전 자동화 아키텍처로 전환하여 더욱 효율적이고 경제적인 솔루션을 제공합니다.",
+    "long_description": "Star Valley Food CLI는 Star Valley 구내식당의 일일 메뉴를 터미널에서 손쉽게 조회할 수 있는 Node.js 기반 CLI 도구입니다. Claude AI를 활용한 완전 자동화 시스템으로 카카오 채널의 메뉴 이미지를 분석하여 텍스트로 변환하고, npm 패키지로 전 세계 어디서든 실시간 조회가 가능합니다.",
+    "tech_stack": [
+      "Vibe Coding",
+      "Claude Code",
+      "Node.js",
+      "JavaScript",
+      "GitHub Actions",
+      "Google Gemini API"
+    ],
+    "start_date": "2025-09-01",
+    "end_date": "2025-09-03",
+    "version": "3.4.2",
+    "category": "Library",
+    "status": "완료",
+    "size": "Small",
+    "github_url": "https://github.com/Kuneosu/Starvalley_food?tab=readme-ov-file",
+    "vercel_url": null,
+    "npm_url": "https://www.npmjs.com/package/starvalley-food",
+    "demo_url": null,
+    "features": [
+      "GitHub Actions 자동화: 정해진 시간에 자동으로 메뉴 업데이트 및 배포",
+      "완전 자동화 파이프라인: 웹 스크래핑 → Gemini API 분석 → GitHub 배포까지 원 스크립트 실행",
+      "실시간 메뉴 조회: st-food today 한 줄로 구내식당 메뉴를 1초 내 터미널에서 확인",
+      "글로벌 npm 패키지: npm install -g starvalley-food로 전 세계 어디서든 설치 및 사용 가능",
+      "다양한 출력 형태: 일반 텍스트, JSON, 상세/간단 모드 등 유연한 출력 옵션"
+    ],
+    "screenshots": [
+      "https://github.com/Kuneosu/image-repo/blob/main/k-library/st-food.png?raw=true"
+    ],
+    "highlights": [
+      "Gemini 2.0 Flash API 한글 OCR: 95%+ 정확도로 카카오 채널 메뉴 이미지를 텍스트로 변환하며 비용 효율적",
+      "GitHub Actions 스케줄링: 매일 정해진 시간에 자동으로 메뉴를 업데이트하여 항상 최신 정보 제공",
+      "초간소화 시스템: 스크립트 하나로 모든 과정이 실행되어 아주 쉽게 메뉴 데이터 업데이트",
+      "GitHub 인프라 활용: 안정적인 데이터 저장소 및 CDN을 통한 빠른 전 세계 접근",
+      "CLI 도구의 완성도: 에러 핸들링, 로딩 스피너, 색상 출력 등 사용자 경험 최적화"
+    ],
+    "challenges": [
+      "웹 스크래핑 불안정성: 카카오 채널 구조 변경 시 스크래핑 로직 실패 위험성 해결",
+      "AI 분석 신뢰성: 이미지 품질이나 메뉴 형식 변화에 따른 OCR 정확도 유지",
+      "\"에러 복구 메커니즘: 네트워크 오류",
+      "API 실패",
+      "권한 문제 등 다양한 실패 시나리오 대응\"",
+      "\"크로스 플랫폼 호환성: macOS",
+      "Windows",
+      "Linux 환경에서의 Cron 작업 및 권한 설정 차이\""
+    ],
+    "learnings": [
+      "GitHub Actions CI/CD: 스케줄 기반 자동화 워크플로우 구축과 비용 효율적인 운영 방법",
+      "AI 모델 비교 및 전환: GPT-4o-mini에서 Gemini 2.0 Flash로 전환하여 성능과 비용 효율성 개선",
+      "자동화의 가치: 사람이 개입할 포인트를 최소화 시켜 안정성과 효율성을 향상",
+      "npm 생태계 활용: 글로벌 패키지 배포를 통해 로컬 도구를 전 세계 사용자에게 제공하는 방법",
+      "GitHub을 DB처럼 활용: 버전 관리 시스템을 실시간 데이터 저장소로 활용하는 창의적 접근",
+      "사용자 중심 CLI 설계: 직관적인 명령어 구조와 풍부한 피드백으로 개발자 경험(DX) 최적화"
+    ],
+    "stars": 0,
+    "downloads": 639,
+    "contributors": 1,
+    "created_at": "2025-09-04 09:16:56.534236+00",
+    "updated_at\r": "2025-09-04 23:53:47.371797+00"
+  }
+] as const;
+
+export default projects;

@@ -4,8 +4,9 @@
   "description": "🎯 개인 프로젝트 포트폴리오 웹사이트 개발 프롬프트",
   "main": "index.js",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "generate-projects": "node scripts/generate-projects-index.js",
+    "dev": "npm run generate-projects && next dev",
+    "build": "npm run generate-projects && next build",
     "start": "next start",
     "lint": "next lint",
     "test": "echo \"Error: no test specified\" && exit 1"
