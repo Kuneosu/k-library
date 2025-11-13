@@ -168,9 +168,9 @@ export default function ProjectTableView({ projects, onViewDetails, onEdit, onDe
                 {/* Tech Stack */}
                 <div className="col-span-2">
                   <div className="flex flex-wrap gap-1">
-                    {project.techStack.slice(0, 2).map((tech) => (
+                    {project.techStack.slice(0, 2).map((tech, techIndex) => (
                       <span
-                        key={tech}
+                        key={`${project.id}-tech-${techIndex}`}
                         className="px-1.5 py-0.5 text-xs rounded bg-secondary text-secondary-foreground"
                       >
                         {tech}
@@ -224,9 +224,9 @@ export default function ProjectTableView({ projects, onViewDetails, onEdit, onDe
                 <div className="col-span-1">
                   <div className="flex items-center gap-1">
                     {/* Links */}
-                    {links.slice(0, 2).map((link) => (
+                    {links.slice(0, 2).map((link, linkIndex) => (
                       <motion.a
-                        key={link.label}
+                        key={`${project.id}-link-${linkIndex}`}
                         href={link.url}
                         target="_blank"
                         rel="noopener noreferrer"

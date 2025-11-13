@@ -104,9 +104,9 @@ export default function ProjectListCard({ project, index, onViewDetails, onEdit,
 
       {/* Tech Stack */}
       <div className="flex flex-wrap gap-1.5 mb-4">
-        {project.techStack.slice(0, 4).map((tech) => (
+        {project.techStack.slice(0, 4).map((tech, techIndex) => (
           <span
-            key={tech}
+            key={`${project.id}-tech-${techIndex}`}
             className="px-2 py-1 text-xs rounded-md bg-secondary text-secondary-foreground font-medium"
           >
             {tech}
@@ -162,9 +162,9 @@ export default function ProjectListCard({ project, index, onViewDetails, onEdit,
       <div className="flex items-center justify-between pt-4 border-t border-border/50">
         {/* Links */}
         <div className="flex items-center gap-2">
-          {links.map((link) => (
+          {links.map((link, linkIndex) => (
             <motion.a
-              key={link.label}
+              key={`${project.id}-link-${linkIndex}`}
               href={link.url}
               target="_blank"
               rel="noopener noreferrer"
