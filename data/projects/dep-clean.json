@@ -1,0 +1,46 @@
+{
+  "id": "CA5E0B93-C8A6-4C17-82F7-3AE11C540B92",
+  "name": "dep-clean",
+  "description": "CLI tool to find and delete dependency/cache directories like node_modules, venv, __pycache__",
+  "long_description": "node_modules, venv, __pycache__ 등 다양한 언어/프레임워크의 의존성 및 캐시 디렉토리를 검색하고 선택적으로 삭제할 수 있는 CLI 도구입니다. 인터랙티브 체크박스 UI를 통해 삭제할 디렉토리를 개별 선택할 수 있으며, 디스크 공간을 효율적으로 관리할 수 있습니다.",
+  "tech_stack": ["TypeScript 5", "Commander 12", "Inquirer 9", "Chalk 5", "Ora 8", "Node.js"],
+  "start_date": "2026-01-20",
+  "end_date": "2026-01-20",
+  "version": "1.1.2",
+  "category": "Tool",
+  "status": "완료",
+  "size": "Small",
+  "github_url": "https://github.com/Kuneosu/dep-clean",
+  "vercel_url": null,
+  "npm_url": "https://www.npmjs.com/package/@kuneosu/dep-clean",
+  "demo_url": null,
+  "features": [
+    "다양한 언어/프레임워크 의존성 디렉토리 자동 감지 (Node.js, Python, Java, Rust, Go, Ruby, PHP, .NET, iOS/macOS)",
+    "인터랙티브 체크박스 UI로 삭제할 디렉토리 개별 선택",
+    "디렉토리별 용량 표시 및 총 절약 공간 계산",
+    "특정 타입만 삭제 또는 제외 옵션 (--only, --exclude)",
+    "Dry-run 모드로 미리보기 지원"
+  ],
+  "screenshots": [
+    "https://github.com/Kuneosu/image-repo/blob/main/k-library/dep-clean/1.png?raw=true"
+  ],
+  "highlights": [
+    "다중 언어/프레임워크 지원으로 통합 의존성 관리 가능",
+    "직관적인 인터랙티브 선택 UI 제공",
+    "디스크 공간 시각화로 효율적인 정리 지원"
+  ],
+  "challenges": [
+    "다양한 운영체제에서의 파일 시스템 호환성 처리",
+    "대용량 디렉토리 스캔 시 성능 최적화"
+  ],
+  "learnings": [
+    "Commander.js를 활용한 CLI 도구 개발",
+    "Inquirer.js로 인터랙티브 터미널 UI 구현",
+    "Node.js 파일 시스템 API 활용"
+  ],
+  "stars": 20,
+  "downloads": 336,
+  "contributors": 1,
+  "created_at": "2026-01-20 00:00:00.000000+00",
+  "updated_at": "2026-01-20 00:00:00.000000+00"
+}
