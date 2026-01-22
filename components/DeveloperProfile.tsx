@@ -104,8 +104,8 @@ export default function DeveloperProfile({ profile, projectStats, onProfileUpdat
             >
               {profile.title}
             </motion.p>
-            <motion.p 
-              className="text-base md:text-lg text-foreground/80 mb-6 max-w-2xl"
+            <motion.p
+              className="text-base md:text-lg text-foreground/80 mb-6 max-w-2xl whitespace-pre-line"
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.3 }}

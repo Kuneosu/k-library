@@ -173,12 +173,8 @@ export default function HomePage() {
             animate={{ opacity: 1, y: 0 }}
             className="text-center text-muted-foreground"
           >
-            <p className="mb-2">
-              © 2025 Kuneosu Library. Built with Next.js, TypeScript, and
-              Tailwind CSS.
-            </p>
-            <p className="text-sm">
-              지속적으로 학습하고 성장하는 개발자의 여정을 기록합니다.
+            <p>
+              © 2026 Kuneosu Library.
             </p>
           </motion.div>
         </div>
