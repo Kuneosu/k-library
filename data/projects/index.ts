@@ -65,6 +65,59 @@ export const projects = [
     "updated_at\r": "2025-09-05 01:10:57.048305+00"
   },
   {
+    "id": "CA5E0B93-C8A6-4C17-82F7-3AE11C540B92",
+    "name": "dep-clean",
+    "description": "CLI tool to find and delete dependency/cache directories like node_modules, venv, __pycache__",
+    "long_description": "node_modules, venv, __pycache__ 등 다양한 언어/프레임워크의 의존성 및 캐시 디렉토리를 검색하고 선택적으로 삭제할 수 있는 CLI 도구입니다. 인터랙티브 체크박스 UI를 통해 삭제할 디렉토리를 개별 선택할 수 있으며, 디스크 공간을 효율적으로 관리할 수 있습니다.",
+    "tech_stack": [
+      "TypeScript 5",
+      "Commander 12",
+      "Inquirer 9",
+      "Chalk 5",
+      "Ora 8",
+      "Node.js"
+    ],
+    "start_date": "2026-01-20",
+    "end_date": "2026-01-20",
+    "version": "1.1.2",
+    "category": "Tool",
+    "status": "완료",
+    "size": "Small",
+    "github_url": "https://github.com/Kuneosu/dep-clean",
+    "vercel_url": null,
+    "npm_url": "https://www.npmjs.com/package/@kuneosu/dep-clean",
+    "demo_url": null,
+    "features": [
+      "다양한 언어/프레임워크 의존성 디렉토리 자동 감지 (Node.js, Python, Java, Rust, Go, Ruby, PHP, .NET, iOS/macOS)",
+      "인터랙티브 체크박스 UI로 삭제할 디렉토리 개별 선택",
+      "디렉토리별 용량 표시 및 총 절약 공간 계산",
+      "특정 타입만 삭제 또는 제외 옵션 (--only, --exclude)",
+      "Dry-run 모드로 미리보기 지원"
+    ],
+    "screenshots": [
+      "https://github.com/Kuneosu/image-repo/blob/main/k-library/dep-clean/1.png?raw=true"
+    ],
+    "highlights": [
+      "다중 언어/프레임워크 지원으로 통합 의존성 관리 가능",
+      "직관적인 인터랙티브 선택 UI 제공",
+      "디스크 공간 시각화로 효율적인 정리 지원"
+    ],
+    "challenges": [
+      "다양한 운영체제에서의 파일 시스템 호환성 처리",
+      "대용량 디렉토리 스캔 시 성능 최적화"
+    ],
+    "learnings": [
+      "Commander.js를 활용한 CLI 도구 개발",
+      "Inquirer.js로 인터랙티브 터미널 UI 구현",
+      "Node.js 파일 시스템 API 활용"
+    ],
+    "stars": 20,
+    "downloads": 336,
+    "contributors": 1,
+    "created_at": "2026-01-20 00:00:00.000000+00",
+    "updated_at": "2026-01-20 00:00:00.000000+00"
+  },
+  {
     "id": "bb3fee80-ae47-49b9-a19b-b84baa92322b",
     "name": "K Library - Developer Projects Showcasee",
     "description": "개발 프로젝트를 체계적으로 관리하고 전시하는 포트폴리오 라이브러리",
@@ -141,6 +194,62 @@ export const projects = [
     "updated_at\r": "2025-09-04 23:53:17.640913+00"
   },
   {
+    "id": "BDA41C8D-4AC4-4ED1-A2B2-01445BCAB5D2",
+    "name": "Multi-Agent System (MAS)",
+    "description": "Multi-Agent System with Claude Code - Orchestrated AI agents for software development",
+    "long_description": "AI 에이전트들이 협업하여 소프트웨어 개발을 자동화하는 시스템. 9개의 전문 AI 에이전트(orchestrator, requirement-analyst, ux-designer, tech-architect, planner, test-designer, developer, reviewer, documenter)가 파일 기반 IPC로 통신하며 협력합니다.",
+    "tech_stack": [
+      "Node.js",
+      "Bash",
+      "Claude Code",
+      "tmux",
+      "JavaScript",
+      "HTML",
+      "CSS"
+    ],
+    "start_date": "2025-11-21",
+    "end_date": "2026-01-21",
+    "version": "1.0.0",
+    "category": "Tool",
+    "status": "완료",
+    "size": "Medium",
+    "github_url": "https://github.com/Kuneosu/Claude-Multi-Agent-System",
+    "vercel_url": null,
+    "npm_url": null,
+    "demo_url": null,
+    "features": [
+      "9개 전문 AI 에이전트 협업 시스템",
+      "TDD 방식 개발 파이프라인 (Test Designer → Developer → Reviewer)",
+      "웹 대시보드로 실시간 모니터링",
+      "에이전트별 Claude 모델 설정 (opus/sonnet/haiku)",
+      "파일 기반 IPC로 안정적인 에이전트 간 통신"
+    ],
+    "screenshots": [
+      "https://github.com/Kuneosu/image-repo/blob/main/k-library/multi-agent-system/1.png?raw=true",
+      "https://github.com/Kuneosu/image-repo/blob/main/k-library/multi-agent-system/2.png?raw=true"
+    ],
+    "highlights": [
+      "Claude Code 기반 멀티 에이전트 오케스트레이션 구현",
+      "tmux를 활용한 병렬 에이전트 관리",
+      "실시간 웹 대시보드 모니터링 시스템"
+    ],
+    "challenges": [
+      "여러 AI 에이전트 간 효과적인 통신 프로토콜 설계",
+      "파일 기반 IPC로 안정적인 시그널 처리 구현",
+      "다양한 실행 모드(터미널/대시보드, 수동/자동) 지원"
+    ],
+    "learnings": [
+      "멀티 에이전트 시스템 아키텍처 설계",
+      "tmux 세션 프로그래매틱 제어",
+      "Claude Code를 활용한 AI 에이전트 개발"
+    ],
+    "stars": 0,
+    "downloads": 0,
+    "contributors": 1,
+    "created_at": "2025-11-21 00:00:00.000000+00",
+    "updated_at": "2026-01-21 00:00:00.000000+00"
+  },
+  {
     "id": "7f8e9a1b-2c3d-4e5f-6a7b-8c9d0e1f2a3b",
     "name": "P-write-vacy",
     "description": "프라이버시를 보호하는 텍스트 에디터 - 옆에서 보는 사람으로부터 글을 보호합니다",
@@ -161,7 +270,7 @@ export const projects = [
     "end_date": "2025-11-13",
     "version": "1.0.0-beta",
     "category": "Tool",
-    "status": "개발중",
+    "status": "완료",
     "size": "Medium",
     "github_url": "https://github.com/Kuneosu/P-write-vacy",
     "vercel_url": null,
