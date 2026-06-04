@@ -194,6 +194,61 @@ export const projects = [
     "updated_at\r": "2025-09-04 23:53:17.640913+00"
   },
   {
+    "id": "26016AD2-C6FC-4D69-934F-B8B5BCD03DCD",
+    "name": "make-slide",
+    "description": "AI presentation skill — generate single-file HTML slides with 10 themes, 4 layouts, PPTX export, and auto image search",
+    "long_description": "AI 코딩 에이전트(Claude Code, Gemini CLI, Codex, Cursor 등)가 단일 HTML 파일로 고품질 프레젠테이션을 생성하는 범용 스킬. 사전 제작된 10개 테마 템플릿을 참조하여 토큰 효율적이고 일관된 품질의 슬라이드를 제로 의존성으로 생성합니다.",
+    "tech_stack": [
+      "Node.js",
+      "HTML",
+      "CSS",
+      "JavaScript"
+    ],
+    "start_date": "2026-03-18",
+    "end_date": "2026-03-25",
+    "version": "2.3.1",
+    "category": "Tool",
+    "status": "완료",
+    "size": "Medium",
+    "github_url": "https://github.com/Kuneosu/make-slide",
+    "vercel_url": "https://make-slide.vercel.app",
+    "npm_url": "https://www.npmjs.com/package/make-slide",
+    "demo_url": null,
+    "features": [
+      "10개 프로페셔널 테마 (다크, 라이트, 기업용, 그라디언트 등)",
+      "단일 HTML 파일 출력 — 빌드 불필요, 브라우저에서 바로 열기",
+      "발표자 노트 (프레젠터 모드, S키)",
+      "PDF 출력 (Ctrl+P, @media print 스타일)",
+      "4가지 레이아웃 스타일 (Centered, Wide, Split, Editorial)",
+      "PPTX(PowerPoint) 변환 지원",
+      "Unsplash 자동 이미지 검색 및 배치",
+      "CSS-Only 차트 (바 차트, 프로그레스 링, KPI 카드)",
+      "키보드 내비게이션 및 터치/스와이프 지원",
+      "npx make-slide init으로 간편 설치"
+    ],
+    "screenshots": [],
+    "highlights": [
+      "AI 에이전트를 위한 디자인 시스템 — 토큰 절약하면서 일관된 품질 보장",
+      "Claude Code, Gemini CLI, Codex, Cursor 등 다양한 AI 도구 호환",
+      "npx 한 줄 명령으로 모든 AI 코딩 환경에 스킬 설치"
+    ],
+    "challenges": [
+      "10개 테마 각각의 디자인 일관성 유지하면서 다양한 슬라이드 타입 지원",
+      "단일 HTML 파일 내에 모든 CSS/JS를 인라인으로 포함하면서 성능 최적화",
+      "PPTX 변환 시 HTML 레이아웃과 시각적 일관성 유지"
+    ],
+    "learnings": [
+      "AI 에이전트의 토큰 효율성을 위한 레퍼런스 기반 생성 패턴 설계",
+      "다중 AI 도구 환경(Claude, Gemini, Codex, Cursor)에서의 호환성 확보 전략",
+      "제로 의존성 단일 파일 프레젠테이션 아키텍처 구축"
+    ],
+    "stars": 66,
+    "downloads": 350,
+    "contributors": 1,
+    "created_at": "2026-03-18 00:00:00.000000+00",
+    "updated_at": "2026-03-25 00:00:00.000000+00"
+  },
+  {
     "id": "BDA41C8D-4AC4-4ED1-A2B2-01445BCAB5D2",
     "name": "Multi-Agent System (MAS)",
     "description": "Multi-Agent System with Claude Code - Orchestrated AI agents for software development",
@@ -336,6 +391,63 @@ export const projects = [
     "contributors": 1,
     "created_at": "2025-11-05 00:00:00.000000+00",
     "updated_at": "2025-11-13 00:00:00.000000+00"
+  },
+  {
+    "id": "FD81F953-2191-4B21-A64D-67080F494012",
+    "name": "project-capture",
+    "description": "웹 앱 라우트를 분석하고 캡처 범위와 로그인 방식을 확인한 뒤 Playwright로 화면 캡처 리포트를 생성하는 Codex 스킬 및 CLI 도구입니다.",
+    "long_description": "웹 프로젝트를 분석해 화면 후보를 찾고, 캡처 범위와 로그인 방식을 사용자에게 확인한 뒤 Playwright로 선택된 화면을 캡처하는 AI 에이전트용 스킬이자 CLI 도구입니다. Codex 스킬로 사용할 수 있고, npm 패키지와 standalone script 형태로 Claude Code, Gemini CLI 등 다른 AI 코딩 도구에서도 활용할 수 있습니다.",
+    "tech_stack": [
+      "Node.js 18",
+      "JavaScript",
+      "Python 3",
+      "Playwright",
+      "npm",
+      "Codex Skill"
+    ],
+    "start_date": "2026-06-04",
+    "end_date": "2026-06-04",
+    "version": "0.1.0",
+    "category": "Tool",
+    "status": "완료",
+    "size": "Small",
+    "github_url": "https://github.com/Kuneosu/project-capture",
+    "vercel_url": null,
+    "npm_url": "https://www.npmjs.com/package/project-capture",
+    "demo_url": null,
+    "features": [
+      "프로젝트 구조 분석을 통한 웹 화면 후보 탐색",
+      "Next.js, Remix, React Router, 일반 SPA 라우트 패턴 분석",
+      "캡처 전 전체, 핵심 도메인, 특정 도메인, 수동 지정 등 범위 선택",
+      "로그인 필요 여부 감지 및 수동 로그인, 환경변수 로그인 지원",
+      "동적 라우트 샘플 확인 후 캡처 또는 제외 처리",
+      "전체 스크롤 길이 캡처와 지정한 viewport 기준 캡처 선택",
+      "Playwright 기반 스크린샷 저장 및 Markdown/JSON 리포트 생성",
+      "npx project-capture init으로 Codex, Claude 계열 에이전트 환경에 설치"
+    ],
+    "screenshots": [
+      "https://github.com/Kuneosu/image-repo/blob/main/k-library/project-capture/1.png?raw=true"
+    ],
+    "highlights": [
+      "AI 에이전트가 화면 캡처 전에 프로젝트를 분석하고 사용자에게 범위를 확인하는 안전한 워크플로우 제공",
+      "Codex 스킬과 npm CLI를 함께 제공해 여러 AI 코딩 도구와 일반 터미널에서 재사용 가능",
+      "로그인, 동적 라우트, 캡처 방식처럼 자동화가 불안정해지기 쉬운 지점을 명시적 확인 단계로 분리"
+    ],
+    "challenges": [
+      "프레임워크별 라우트 구조가 달라 정적 분석 기반의 best-effort 탐색 규칙 설계 필요",
+      "로그인, SSO, OTP, 동적 라우트처럼 자동화가 어려운 화면을 안전하게 처리하는 정책 정리",
+      "Codex 스킬 형식과 다른 AI 에이전트 및 npm CLI 사용 방식을 동시에 지원하는 배포 구조 구성"
+    ],
+    "learnings": [
+      "AI 에이전트 스킬을 단순 지침서가 아니라 실행 가능한 CLI와 함께 배포하는 구조 설계",
+      "Playwright 캡처 자동화에서 전체 페이지와 viewport 캡처 요구를 명확히 분리하는 방식",
+      "Codex 외 Claude Code, Gemini CLI 등에서도 사용할 수 있는 에이전트 친화적 설치 흐름 구성"
+    ],
+    "stars": 0,
+    "downloads": 0,
+    "contributors": 1,
+    "created_at": "2026-06-04 00:00:00.000000+00",
+    "updated_at": "2026-06-04 00:00:00.000000+00"
   },
   {
     "id": "80834673-0852-473c-9eed-a660b7a9c71b",
