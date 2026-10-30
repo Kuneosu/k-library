@@ -1,0 +1,66 @@
+{
+  "id": "54617469-e974-4c54-bec8-9611ebe5a75d",
+  "name": "Standby Screen",
+  "description": "시계부터 알림까지, 나만의 대기 화면. 잠금·충전·가로 자세에 맞춰 열리는 Android 스탠바이 앱.",
+  "long_description": "놓아둔 Android 기기를 나만의 시계·정보 화면으로 바꾸는 Kotlin · Jetpack Compose 기반 개인용 실험 프로젝트입니다. 잠금·충전·가로 자세가 모두 갖춰지면 스탠바이가 열리고, 하나라도 해제되면 닫힙니다. 시계와 사진, GIF, 알림, 출퇴근 게이지를 원하는 위치에 배치하고 여러 디자인을 프리셋으로 저장할 수 있습니다. Android 12 이상을 지원하며 Galaxy Z Fold6에서 검증했습니다. 특정 기종에 한정하지 않는 앱을 지향하며, 현재는 Android 구현을 제공합니다. iOS 확장은 검토 단계입니다. 첫 번째 이미지는 생성한 소개 배너이고, 나머지 네 장은 Fold6 검사 앱에서 촬영한 실제 화면입니다.",
+  "tech_stack": [
+    "Kotlin 2",
+    "Jetpack Compose",
+    "Material 3",
+    "Android SDK 36",
+    "AndroidX Window 1",
+    "DataStore 1",
+    "Gradle 9",
+    "JUnit 4"
+  ],
+  "start_date": "2026-10-29",
+  "end_date": "2026-10-29",
+  "version": "0.13.0",
+  "category": "Mobile",
+  "status": "개발중",
+  "size": "Medium",
+  "github_url": "https://github.com/Kuneosu/standby-aos",
+  "vercel_url": null,
+  "npm_url": null,
+  "demo_url": null,
+  "features": [
+    "잠금·외부 전원·가로 자세를 함께 감지하는 자동 실행과 조건 해제 시 자동 종료",
+    "시계·날짜·배터리·버튼의 위치, 크기, 색상, 정렬, 내부 여백 편집",
+    "사진 배경과 여러 GIF 배치, GIF별 재생 속도·반복·투명도 설정",
+    "전체 화면 편집, 겹친 요소 목록 선택, 가장자리 맞춤과 중앙 정렬 가이드",
+    "여러 디자인의 프리셋 저장·순환과 선택한 요소의 공통 배치",
+    "선택한 앱의 알림 누적, 앱별 펼침·접힘, 내용 공개 범위와 기록 삭제 설정",
+    "출근 시각 선택·수정, 근무 진행률과 예정 퇴근 표시, 완료 폭죽과 자동 퇴근",
+    "유리 스타일 밝기 슬라이더와 수동 적색 야간 모드"
+  ],
+  "screenshots": [
+    "https://github.com/Kuneosu/image-repo/blob/main/k-library/standby-screen/1.png?raw=true",
+    "https://github.com/Kuneosu/image-repo/blob/main/k-library/standby-screen/2.png?raw=true",
+    "https://github.com/Kuneosu/image-repo/blob/main/k-library/standby-screen/3.png?raw=true",
+    "https://github.com/Kuneosu/image-repo/blob/main/k-library/standby-screen/4.png?raw=true",
+    "https://github.com/Kuneosu/image-repo/blob/main/k-library/standby-screen/5.png?raw=true"
+  ],
+  "highlights": [
+    "사용하지 않는 시간을 시계·사진·알림을 보는 개인화 화면으로 전환",
+    "실제 가로 화면에서 요소를 편집하고 프리셋 간 배치를 공유",
+    "알림 기록 삭제와 원본 앱 알림을 분리하고 표시 내용을 앱별로 선택",
+    "일반 사용 앱과 검사 앱의 패키지를 분리해 실기기 검증 기록 관리"
+  ],
+  "challenges": [
+    "Android 백그라운드 실행 제약과 잠금·충전·자세 변화에 따른 진입·종료 처리",
+    "Fold의 화면 크기 변화, 요소 겹침, 정렬과 내부 여백을 고려한 편집 좌표 관리",
+    "앱별 알림 중복·누적·펼침 상태와 개인정보 표시 범위 관리",
+    "출근 시각 변경, 퇴근 예정 시각 계산, 완료 처리와 재진입 상태의 일관성 유지"
+  ],
+  "learnings": [
+    "Jetpack Compose에서 드래그·크기 조절·제스처와 화면 상태를 연결하는 방법",
+    "Android 생명주기와 화면·전원·잠금 상태를 함께 다루는 조건 기반 실행 설계",
+    "DataStore와 로컬 저장소를 활용한 프리셋·알림·근무 상태 보존",
+    "단위 검사와 실제 기기의 잠금·충전·자세 검증을 구분하고 증거를 남기는 방법"
+  ],
+  "stars": 0,
+  "downloads": 0,
+  "contributors": 1,
+  "created_at": "2026-10-29 00:00:00.000000+00",
+  "updated_at": "2026-10-29 00:00:00.000000+00"
+}
